@@ -1,0 +1,33 @@
+# Dependencies
+node_modules
+.pnp
+.pnp.js
+
+# Build
+.next
+out
+build
+dist
+
+# Env and secrets
+.env
+.env*.local
+
+# Database (local SQLite)
+*.db
+dev.db
+prisma/dev.db
+
+# Debug and IDE
+npm-debug.log*
+.DS_Store
+*.pem
+.idea
+.vscode
+
+# Vercel
+.vercel
+
+# TypeScript
+next-env.d.ts
+*.tsbuildinfo

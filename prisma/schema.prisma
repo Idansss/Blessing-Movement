@@ -1,0 +1,452 @@
+// Blessings Global Outreach — Full platform (Phases 1–10)
+// SQLite for dev; use PostgreSQL for production.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// ========== AUTH & USERS ==========
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token     String?
+  expires_at       Int?
+  token_type       String?
+  scope            String?
+  id_token         String?
+  session_state    String?
+  user             User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String?   @unique
+  emailVerified DateTime?
+  image         String?
+  password      String?
+  role          String    @default("donor") // donor | admin | volunteer | prayer_team | member
+  phone         String?
+  city          String?
+  bio           String?
+
+  accounts            Account[]
+  sessions            Session[]
+  donations           Donation[]
+  volunteerApps       VolunteerApplication[]
+  prayerAssigned      PrayerRequest[]         @relation("PrayerAssignee")
+  prayerFollowUps     PrayerFollowUp[]
+  podMemberships      PodMember[]
+  podsLed             Pod[]                   @relation("PodLead")
+  discussionReplies  DiscussionReply[]
+  discussions         Discussion[]
+  enrollments        CourseEnrollment[]
+  certificates        Certificate[]
+  assignmentSubs     AssignmentSubmission[]
+  mentorshipMentor   Mentorship[]             @relation("Mentor")
+  mentorshipMentee   Mentorship[]             @relation("Mentee")
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires   DateTime
+  @@unique([identifier, token])
+}
+
+// ========== PHASE 1: DONATIONS ==========
+model Donation {
+  id          String    @id @default(cuid())
+  amount      Int
+  currency    String    @default("NGN")
+  reference   String    @unique
+  status      String    @default("pending")
+  frequency   String    @default("once")
+  donorName   String?
+  donorEmail  String
+  userId      String?
+  metadata    String?
+  completedAt DateTime?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  user        User?     @relation(fields: [userId], references: [id], onDelete: SetNull)
+  @@index([donorEmail])
+  @@index([userId])
+  @@index([status])
+  @@index([createdAt])
+}
+
+// ========== PHASE 2: VOLUNTEER + PARTNER CRM ==========
+model VolunteerApplication {
+  id           String   @id @default(cuid())
+  name         String
+  email        String
+  phone        String?
+  interest     String?  // outreach | praise | hangout | bootcamp | admin
+  status       String   @default("pending") // pending | approved | declined
+  assignedTo   String?  // event id or team name
+  notes        String?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  userId       String?
+  user         User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
+  @@index([status])
+  @@index([email])
+}
+
+model Partner {
+  id          String   @id @default(cuid())
+  name        String   // org or person
+  email       String
+  tier        String   @default("bronze") // bronze | silver | gold | kingdom
+  status      String   @default("pending") // pending | approved | declined
+  notes       String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  @@index([status])
+}
+
+// ========== PHASE 3: EVENTS ==========
+model Event {
+  id          String   @id @default(cuid())
+  title       String
+  slug        String   @unique
+  description String?
+  type        String   // outreach | praise | hangout | bootcamp
+  location    String?
+  startAt     DateTime
+  endAt       DateTime?
+  capacity    Int?     // null = unlimited
+  imageUrl    String?
+  published   Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  registrations EventRegistration[]
+  @@index([type])
+  @@index([startAt])
+}
+
+model EventRegistration {
+  id         String    @id @default(cuid())
+  eventId    String
+  email      String
+  name       String
+  phone      String?
+  status     String    @default("registered")
+  qrCode     String?   @unique
+  checkedInAt DateTime?
+  createdAt  DateTime  @default(now())
+  event      Event     @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  @@unique([eventId, email])
+  @@index([eventId])
+  @@index([qrCode])
+}
+
+// ========== PHASE 4: PRAYER CARE ==========
+model PrayerRequest {
+  id            String   @id @default(cuid())
+  content       String
+  isPublic      Boolean  @default(false)
+  status        String   @default("new") // new | praying | followed_up | testimony
+  requesterEmail String?
+  requesterName String?
+  assignedToId  String?
+  outcome       String?  // testimony text
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  assignedTo    User?    @relation("PrayerAssignee", fields: [assignedToId], references: [id], onDelete: SetNull)
+  followUps     PrayerFollowUp[]
+  @@index([status])
+  @@index([assignedToId])
+}
+
+model PrayerFollowUp {
+  id             String   @id @default(cuid())
+  prayerRequestId String
+  userId         String
+  note           String
+  createdAt      DateTime @default(now())
+  prayerRequest  PrayerRequest @relation(fields: [prayerRequestId], references: [id], onDelete: Cascade)
+  user           User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  @@index([prayerRequestId])
+}
+
+// ========== PHASE 6: CMS (content) ==========
+model ContentBlock {
+  id        String   @id @default(cuid())
+  key       String   @unique
+  data      String   // JSON
+  updatedAt DateTime @updatedAt
+}
+
+// ========== PHASE 7: MEMBER PORTAL (Pods, Devotion, Discussion) ==========
+model Pod {
+  id        String   @id @default(cuid())
+  name      String
+  city      String?
+  type      String?  // interest: career | students | creatives | etc
+  leadId    String?
+  createdAt DateTime @default(now())
+  lead      User?    @relation("PodLead", fields: [leadId], references: [id], onDelete: SetNull)
+  members   PodMember[]
+  discussions Discussion[]
+}
+
+model PodMember {
+  id       String   @id @default(cuid())
+  podId    String
+  userId   String
+  role     String   @default("member") // member | lead
+  joinedAt DateTime @default(now())
+  pod      Pod      @relation(fields: [podId], references: [id], onDelete: Cascade)
+  user     User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  @@unique([podId, userId])
+  @@index([userId])
+}
+
+model Devotion {
+  id        String   @id @default(cuid())
+  title     String
+  content   String
+  date      DateTime
+  createdAt DateTime @default(now())
+  @@index([date])
+}
+
+model Discussion {
+  id        String   @id @default(cuid())
+  podId     String?
+  title     String
+  authorId  String
+  createdAt DateTime @default(now())
+  pod       Pod?     @relation(fields: [podId], references: [id], onDelete: Cascade)
+  author    User     @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  replies   DiscussionReply[]
+  @@index([podId])
+}
+
+model DiscussionReply {
+  id           String   @id @default(cuid())
+  discussionId String
+  authorId     String
+  content      String
+  createdAt    DateTime @default(now())
+  discussion   Discussion @relation(fields: [discussionId], references: [id], onDelete: Cascade)
+  author       User     @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  @@index([discussionId])
+}
+
+// ========== PHASE 8: BOOTCAMP / LEARNING ==========
+model Course {
+  id          String   @id @default(cuid())
+  title       String
+  description String?
+  imageUrl    String?
+  order       Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  modules     CourseModule[]
+  enrollments CourseEnrollment[]
+  certificates Certificate[]
+  assignments Assignment[]
+}
+
+model CourseModule {
+  id          String       @id @default(cuid())
+  courseId    String
+  title       String
+  order       Int          @default(0)
+  course      Course       @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  lessons     CourseLesson[]
+  assignments Assignment[]
+  @@index([courseId])
+}
+
+model CourseLesson {
+  id        String   @id @default(cuid())
+  moduleId  String
+  title     String
+  contentUrl String?
+  type      String   @default("video") // video | text | link
+  order     Int      @default(0)
+  module    CourseModule @relation(fields: [moduleId], references: [id], onDelete: Cascade)
+  @@index([moduleId])
+}
+
+model CourseEnrollment {
+  id         String   @id @default(cuid())
+  userId     String
+  courseId   String
+  status     String   @default("active")
+  progress   String?  // JSON: { completedLessonIds: [] }
+  completedAt DateTime?
+  createdAt  DateTime @default(now())
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  course     Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  @@unique([userId, courseId])
+  @@index([userId])
+}
+
+model Assignment {
+  id          String   @id @default(cuid())
+  courseId    String
+  moduleId    String?
+  title       String
+  description String?
+  dueAt       DateTime?
+  createdAt   DateTime @default(now())
+  course      Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  module      CourseModule? @relation(fields: [moduleId], references: [id], onDelete: SetNull)
+  submissions AssignmentSubmission[]
+  @@index([courseId])
+}
+
+model AssignmentSubmission {
+  id           String   @id @default(cuid())
+  assignmentId String
+  userId       String
+  content      String
+  status       String   @default("submitted")
+  gradedAt     DateTime?
+  createdAt    DateTime @default(now())
+  assignment   Assignment @relation(fields: [assignmentId], references: [id], onDelete: Cascade)
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  @@index([assignmentId])
+  @@index([userId])
+}
+
+model Certificate {
+  id        String   @id @default(cuid())
+  userId    String
+  courseId  String
+  issuedAt  DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  course    Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  @@unique([userId, courseId])
+  @@index([userId])
+}
+
+model Mentorship {
+  id        String   @id @default(cuid())
+  mentorId  String
+  menteeId  String
+  courseId  String?
+  status    String   @default("active")
+  createdAt DateTime @default(now())
+  mentor    User     @relation("Mentor", fields: [mentorId], references: [id], onDelete: Cascade)
+  mentee    User     @relation("Mentee", fields: [menteeId], references: [id], onDelete: Cascade)
+  @@index([mentorId])
+  @@index([menteeId])
+}
+
+// ========== PHASE 9: MEDIA ==========
+model MediaItem {
+  id          String   @id @default(cuid())
+  type        String   // sermon | stream | podcast | reel
+  title       String
+  description String?
+  url         String
+  thumbnailUrl String?
+  speaker     String?
+  series      String?
+  topic       String?
+  publishedAt DateTime?
+  createdAt   DateTime @default(now())
+  @@index([type])
+  @@index([topic])
+}
+
+// ========== PHASE 10: COMMUNICATION ==========
+model EmailTemplate {
+  id       String   @id @default(cuid())
+  name     String   @unique
+  subject  String
+  bodyHtml String
+  variables String? // JSON array of variable names
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Segment {
+  id           String   @id @default(cuid())
+  name         String
+  definition   String   // JSON: { type: 'donors', lastDonationAfter: '30d' }
+  createdAt    DateTime @default(now())
+}
+
+model Journey {
+  id         String   @id @default(cuid())
+  name       String
+  triggerType String  // on_donation | on_registration | on_prayer | manual
+  segmentId  String?
+  steps      String   // JSON array of { templateId, delayMinutes }
+  active     Boolean  @default(true)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+model MessageLog {
+  id         String   @id @default(cuid())
+  userId     String?
+  email      String?
+  type       String   // email | sms | whatsapp
+  journeyId  String?
+  templateId String?
+  sentAt     DateTime @default(now())
+  status     String   @default("sent")
+  @@index([userId])
+  @@index([email])
+  @@index([sentAt])
+}
+
+// ========== CONTACT & NEWSLETTER ==========
+model Contact {
+  id        String   @id @default(cuid())
+  name      String
+  email     String
+  subject   String?
+  message   String
+  isPrayer  Boolean  @default(false)
+  createdAt DateTime @default(now())
+  @@index([email])
+  @@index([createdAt])
+}
+
+model NewsletterSubscriber {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  source       String?  // "footer" | "home" | etc.
+  subscribedAt DateTime @default(now())
+  @@index([subscribedAt])
+}
+
+model EventInterest {
+  id         String   @id @default(cuid())
+  eventId    String   // static event ID
+  eventTitle String
+  name       String
+  email      String
+  phone      String?
+  createdAt  DateTime @default(now())
+  @@unique([eventId, email])
+  @@index([eventId])
+  @@index([email])
+}

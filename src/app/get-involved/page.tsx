@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Heart, Handshake, MessageCircle, Loader2, CheckCircle } from "lucide-react";
+import { Heart, Handshake, MessageCircle, Loader2, CheckCircle, ChevronDown } from "lucide-react";
 import Link from "next/link";
 
 const partnerTiers = [
@@ -131,15 +131,21 @@ export default function GetInvolvedPage() {
               </div>
               <div>
                 <label htmlFor="v-interest" className="block text-sm font-medium text-stone-700 mb-1">I&apos;m interested in (optional)</label>
-                <select id="v-interest" name="v-interest"
-                  className="w-full px-4 py-2.5 rounded-xl border border-stone-200 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none">
-                  <option value="">Select...</option>
-                  <option value="outreach">Outreach / Medical & Welfare</option>
-                  <option value="praise">Praise & Prophesy events</option>
-                  <option value="hangout">Hangouts & community</option>
-                  <option value="bootcamp">Career Bootcamp / mentoring</option>
-                  <option value="admin">Admin / logistics</option>
-                </select>
+                <div className="relative">
+                  <select
+                    id="v-interest"
+                    name="v-interest"
+                    className="w-full appearance-none px-4 py-2.5 pr-10 rounded-xl border border-stone-200 bg-white focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none text-stone-700 cursor-pointer transition-colors"
+                  >
+                    <option value="">Select...</option>
+                    <option value="outreach">Outreach / Medical & Welfare</option>
+                    <option value="praise">Praise & Prophesy events</option>
+                    <option value="hangout">Hangouts & community</option>
+                    <option value="bootcamp">Career Bootcamp / mentoring</option>
+                    <option value="admin">Admin / logistics</option>
+                  </select>
+                  <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 h-5 w-5 text-stone-400 pointer-events-none" />
+                </div>
               </div>
               {volunteerError && (
                 <p className="text-sm text-red-600 bg-red-50 rounded-xl px-4 py-3">{volunteerError}</p>

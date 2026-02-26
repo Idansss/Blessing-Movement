@@ -57,14 +57,17 @@ export function PrayerModal({ open, onClose }: PrayerModalProps) {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 flex items-center justify-center p-4 overflow-y-auto pointer-events-none"
+            className="fixed inset-0 z-50 flex items-center justify-center p-4 overflow-y-auto"
+            onClick={(e) => {
+              if (e.target === e.currentTarget) onClose();
+            }}
           >
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
               transition={{ type: "spring", damping: 25 }}
-              className="w-full max-w-md bg-white rounded-2xl shadow-xl p-6 my-auto pointer-events-auto max-h-[min(85vh,32rem)] overflow-y-auto shrink-0"
+              className="w-full max-w-md bg-white rounded-2xl shadow-xl p-6 my-auto max-h-[min(85vh,32rem)] overflow-y-auto shrink-0"
             >
             <div className="flex items-center justify-between mb-4">
               <h2 className="font-display text-xl font-semibold text-primary">

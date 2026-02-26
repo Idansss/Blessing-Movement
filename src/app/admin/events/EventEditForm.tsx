@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { CloudinaryUpload } from "@/components/ui/CloudinaryUpload";
 
 type Event = {
   id: string;
@@ -126,6 +127,12 @@ export function EventEditForm({ event }: { event: Event }) {
           className="w-full px-4 py-2 rounded-lg border border-stone-200"
         />
       </div>
+      <CloudinaryUpload
+        label="Event image"
+        folder="blessings/events"
+        value={form.imageUrl}
+        onChange={(url) => setForm((f) => ({ ...f, imageUrl: url }))}
+      />
       <div>
         <label className="flex items-center gap-2">
           <input

@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { CloudinaryUpload } from "@/components/ui/CloudinaryUpload";
 
 export default function NewEventPage() {
   const router = useRouter();
@@ -120,6 +121,12 @@ export default function NewEventPage() {
             className="w-full px-4 py-2 rounded-lg border border-stone-200"
           />
         </div>
+        <CloudinaryUpload
+          label="Event image"
+          folder="blessings/events"
+          value={form.imageUrl}
+          onChange={(url) => setForm((f) => ({ ...f, imageUrl: url }))}
+        />
         <div>
           <label className="block text-sm font-medium text-stone-700 mb-1">Description</label>
           <textarea

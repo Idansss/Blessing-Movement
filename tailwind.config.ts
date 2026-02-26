@@ -23,7 +23,7 @@ const config: Config = {
         },
         muted: {
           DEFAULT: "#f5f5f4",
-          foreground: "#78716c",
+          foreground: "#57534e",
         },
       },
       fontFamily: {

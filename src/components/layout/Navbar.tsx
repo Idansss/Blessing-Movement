@@ -49,7 +49,10 @@ export function Navbar() {
         <div className="max-w-7xl mx-auto px-4 flex items-center justify-between h-16">
           <Link
             href="/"
-            className={cn("font-display text-xl font-bold shrink-0", useLightNav ? "text-white" : "text-primary")}
+            className={cn(
+              "font-display text-xl font-bold shrink-0",
+              useLightNav ? "text-white drop-shadow-md" : "text-primary"
+            )}
           >
             Blessings Global
           </Link>
@@ -63,8 +66,8 @@ export function Navbar() {
                   pathname === link.href
                     ? "text-primary"
                     : useLightNav
-                      ? "text-white/90 hover:text-white"
-                      : "text-stone-600 hover:text-primary"
+                      ? "text-white hover:text-white drop-shadow-md"
+                      : "text-stone-700 hover:text-primary"
                 )}
               >
                 {link.label}

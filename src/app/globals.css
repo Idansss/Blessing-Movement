@@ -15,9 +15,14 @@
   }
   html {
     scroll-behavior: smooth;
+    color: #1c1917;
+    font-family: var(--font-inter), system-ui, -apple-system, sans-serif;
   }
   body {
-    @apply bg-white text-stone-900 antialiased;
+    @apply antialiased;
+    background-color: #ffffff;
+    color: #1c1917;
+    font-family: var(--font-inter), system-ui, -apple-system, sans-serif;
   }
 }
 

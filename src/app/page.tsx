@@ -117,9 +117,9 @@ export default function HomePage() {
           priority
           sizes="100vw"
         />
-        <div className="relative z-10 max-w-4xl mx-auto px-4 text-center text-white">
+        <div className="relative z-10 max-w-4xl mx-auto px-4 text-center text-white [text-shadow:0_1px_2px_rgba(0,0,0,0.5)]">
           <motion.h1
-            className="font-display text-4xl md:text-5xl lg:text-6xl font-bold leading-tight"
+            className="font-display text-4xl md:text-5xl lg:text-6xl font-bold leading-tight [text-shadow:0_2px_8px_rgba(0,0,0,0.4)]"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}

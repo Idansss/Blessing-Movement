@@ -45,11 +45,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${inter.variable} ${playfair.variable}`}>
-      <body className="min-h-screen flex flex-col">
+      <body className="min-h-screen flex flex-col bg-white text-stone-900 font-sans">
         <SessionProvider>
           <AnnouncementBanner />
           <Navbar />
-          <main className="flex-1">{children}</main>
+          <main className="flex-1 text-stone-900">{children}</main>
           <Footer />
           <BackToTop />
           <CookieConsent />

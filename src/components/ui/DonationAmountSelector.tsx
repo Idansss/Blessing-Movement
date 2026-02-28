@@ -48,19 +48,19 @@ export function DonationAmountSelector({
             type="button"
             onClick={() => handleSelect(p.amount)}
             className={cn(
-              "p-4 rounded-xl border-2 text-left transition-all",
+              "p-4 rounded-xl border-2 text-left transition-all bg-transparent",
               selected === p.amount
-                ? "border-primary bg-primary/5 text-primary"
-                : "border-stone-200 hover:border-primary/50 text-stone-700"
+                ? "border-accent bg-accent/15 text-accent-foreground shadow-[0_0_18px_rgba(212,175,55,0.45)]"
+                : "border-[#F5F0E8]/40 hover:border-accent/70 text-[#F5F0E8CC]"
             )}
           >
             <span className="font-display text-xl font-bold">{p.label}</span>
-            <p className="mt-1 text-xs text-muted-foreground">{p.impact}</p>
+            <p className="mt-1 text-xs text-[#F5F0E8B3]">{p.impact}</p>
           </button>
         ))}
       </div>
       <div>
-        <label htmlFor="custom-amount" className="block text-sm font-medium text-stone-700 mb-1">
+        <label htmlFor="custom-amount" className="block text-sm font-medium text-[#F5F0E8] mb-1">
           Or enter custom amount (₦)
         </label>
         <input

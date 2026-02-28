@@ -169,13 +169,13 @@ export default async function PodsPage() {
       {/* ------------------------------------------------------------------ */}
       {/* How Pods Work                                                       */}
       {/* ------------------------------------------------------------------ */}
-      <section className="py-16 bg-white">
+      <section className="py-16 bg-[#0D0A07]">
         <div className="max-w-5xl mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="font-display text-3xl font-bold text-stone-900">
+            <h2 className="font-display text-3xl font-bold text-[#F5F0E8]">
               How Pods Work
             </h2>
-            <p className="mt-3 text-muted-foreground max-w-xl mx-auto">
+            <p className="mt-3 text-[#F5F0E8B3] max-w-xl mx-auto">
               Pods are small, intentional groups of 10–35 people. They meet weekly,
               pray together, and grow towards shared purposes.
             </p>
@@ -187,15 +187,15 @@ export default async function PodsPage() {
               return (
                 <div
                   key={item.title}
-                  className="text-center p-6 rounded-2xl bg-muted/40 border border-stone-100"
+                  className="text-center p-6 glass-dark"
                 >
-                  <div className="inline-flex h-14 w-14 items-center justify-center rounded-full bg-primary/10 mb-4">
-                    <Icon className="h-7 w-7 text-primary" />
+                  <div className="inline-flex h-14 w-14 items-center justify-center rounded-full bg-primary/25 mb-4">
+                    <Icon className="h-7 w-7 text-accent" />
                   </div>
-                  <h3 className="font-display text-lg font-semibold text-stone-900 mb-2">
+                  <h3 className="font-display text-lg font-semibold text-[#F5F0E8] mb-2">
                     {item.title}
                   </h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed">
+                  <p className="text-sm text-[#F5F0E8B3] leading-relaxed">
                     {item.description}
                   </p>
                 </div>
@@ -208,13 +208,13 @@ export default async function PodsPage() {
       {/* ------------------------------------------------------------------ */}
       {/* Pods Grid                                                           */}
       {/* ------------------------------------------------------------------ */}
-      <section id="pods" className="py-16 bg-muted/30">
+      <section id="pods" className="py-16 bg-[#0D0A07]">
         <div className="max-w-5xl mx-auto px-4">
           <div className="mb-10">
-            <h2 className="font-display text-3xl font-bold text-stone-900">
+            <h2 className="font-display text-3xl font-bold text-[#F5F0E8]">
               Active Pods
             </h2>
-            <p className="mt-2 text-muted-foreground">
+            <p className="mt-2 text-[#F5F0E8B3]">
               {pods.length} pod{pods.length !== 1 ? "s" : ""} currently running.
               Join one near you or online.
             </p>
@@ -224,18 +224,18 @@ export default async function PodsPage() {
             {pods.map((pod) => (
               <div
                 key={pod.name}
-                className="bg-white rounded-2xl border border-stone-200 shadow-sm p-6 flex flex-col gap-4 hover:shadow-md transition-shadow"
+                className="glass-dark p-6 flex flex-col gap-4 hover:shadow-[0_0_24px_rgba(212,175,55,0.35)] transition-shadow"
               >
                 {/* Pod header */}
                 <div className="flex items-start justify-between gap-3">
-                  <h3 className="font-display text-xl font-semibold text-stone-900 leading-snug">
+                  <h3 className="font-display text-xl font-semibold text-[#F5F0E8] leading-snug">
                     {pod.name}
                   </h3>
                 </div>
 
                 {/* Badges */}
                 <div className="flex flex-wrap gap-2">
-                  <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium bg-stone-100 text-stone-600">
+                  <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium bg-[#1C1508] text-[#F5F0E8B3]">
                     <MapPin className="h-3 w-3" />
                     {pod.city}
                   </span>
@@ -248,13 +248,13 @@ export default async function PodsPage() {
                 </div>
 
                 {/* Description */}
-                <p className="text-sm text-stone-600 leading-relaxed">
+                <p className="text-sm text-[#F5F0E8B3] leading-relaxed">
                   {pod.description}
                 </p>
 
                 {/* Footer */}
-                <div className="flex items-center justify-between pt-2 border-t border-stone-100">
-                  <span className="inline-flex items-center gap-1.5 text-sm text-muted-foreground">
+                <div className="flex items-center justify-between pt-2 border-t border-[#2A1C0C]">
+                  <span className="inline-flex items-center gap-1.5 text-sm text-[#F5F0E8B3]">
                     <Users className="h-4 w-4" />
                     {pod.members} member{pod.members !== 1 ? "s" : ""}
                   </span>

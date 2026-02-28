@@ -71,18 +71,18 @@ function TestimonyMiniCard({
 
   return (
     <div className="bg-muted/60 rounded-xl border border-stone-200 p-4">
-      <p className="text-sm text-stone-600 italic leading-relaxed">
+      <p className="text-sm text-[#F5F0E8CC] italic leading-relaxed">
         &ldquo;{truncated}&rdquo;
       </p>
       <div className="mt-3 flex items-center gap-2">
-        <div className="w-7 h-7 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
-          <span className="text-xs font-bold text-primary">
+        <div className="w-7 h-7 rounded-full bg-primary/20 flex items-center justify-center flex-shrink-0">
+          <span className="text-xs font-bold text-accent">
             {testimony.name.charAt(0)}
           </span>
         </div>
         <div>
-          <p className="text-xs font-semibold text-stone-800">{testimony.name}</p>
-          <p className="text-xs text-stone-400">{testimony.role}</p>
+          <p className="text-xs font-semibold text-[#F5F0E8]">{testimony.name}</p>
+          <p className="text-xs text-[#F5F0E8B3]">{testimony.role}</p>
         </div>
       </div>
     </div>
@@ -153,7 +153,7 @@ export default function TestimoniesPage() {
   return (
     <>
       {/* ── Header ────────────────────────────────────────────────────────── */}
-      <section className="pt-28 pb-12 bg-muted/30">
+      <section className="pt-28 pb-12 bg-gradient-to-b from-[#1A1208] via-transparent to-[#050302]">
         <div className="max-w-5xl mx-auto px-4 text-center">
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
@@ -165,7 +165,7 @@ export default function TestimoniesPage() {
           </motion.div>
 
           <motion.h1
-            className="font-display text-4xl md:text-5xl font-bold text-stone-900"
+            className="font-display text-4xl md:text-5xl font-bold text-[#F5F0E8]"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
@@ -174,7 +174,7 @@ export default function TestimoniesPage() {
           </motion.h1>
 
           <motion.p
-            className="mt-4 text-xl text-stone-500 max-w-xl mx-auto"
+            className="mt-4 text-xl text-[#F5F0E8B3] max-w-xl mx-auto"
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
@@ -186,7 +186,7 @@ export default function TestimoniesPage() {
       </section>
 
       {/* ── Two-column content ────────────────────────────────────────────── */}
-      <section className="py-12 bg-white">
+      <section className="py-12 bg-[#0D0A07]">
         <div className="max-w-5xl mx-auto px-4 grid md:grid-cols-2 gap-12">
 
           {/* ── Left: Form ────────────────────────────────────────────────── */}
@@ -221,12 +221,12 @@ export default function TestimoniesPage() {
               </div>
             ) : (
               /* ── Form ───────────────────────────────────────────────────── */
-              <form onSubmit={handleSubmit} className="space-y-5">
+              <form onSubmit={handleSubmit} className="space-y-5 glass-dark p-6 rounded-2xl">
                 <div>
-                  <h2 className="font-display text-2xl font-bold text-stone-900 mb-1">
+                  <h2 className="font-display text-2xl font-bold text-[#F5F0E8] mb-1">
                     Your story
                   </h2>
-                  <p className="text-sm text-stone-400">
+                  <p className="text-sm text-[#F5F0E8B3]">
                     Fields marked * are required.
                   </p>
                 </div>
@@ -235,7 +235,7 @@ export default function TestimoniesPage() {
                 <div>
                   <label
                     htmlFor="testimony-name"
-                    className="block text-sm font-medium text-stone-700 mb-1"
+                    className="block text-sm font-medium text-[#F5F0E8] mb-1"
                   >
                     Name *
                   </label>
@@ -254,7 +254,7 @@ export default function TestimoniesPage() {
                 <div>
                   <label
                     htmlFor="testimony-email"
-                    className="block text-sm font-medium text-stone-700 mb-1"
+                    className="block text-sm font-medium text-[#F5F0E8] mb-1"
                   >
                     Email *
                   </label>
@@ -273,7 +273,7 @@ export default function TestimoniesPage() {
                 <div>
                   <label
                     htmlFor="testimony-type"
-                    className="block text-sm font-medium text-stone-700 mb-1"
+                    className="block text-sm font-medium text-[#F5F0E8] mb-1"
                   >
                     Type of testimony *
                   </label>
@@ -313,7 +313,7 @@ export default function TestimoniesPage() {
                     placeholder="Tell us what God did…"
                     className="w-full px-4 py-3 rounded-xl border border-stone-200 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none text-sm resize-y transition-colors leading-relaxed"
                   />
-                  <p className="text-xs text-stone-400 mt-1">
+                  <p className="text-xs text-[#F5F0E8B3] mt-1">
                     Be as detailed as you like. The more specific, the more it
                     encourages others.
                   </p>
@@ -330,9 +330,9 @@ export default function TestimoniesPage() {
                   />
                   <label
                     htmlFor="testimony-public"
-                    className="text-sm text-stone-600 cursor-pointer leading-snug"
+                    className="text-sm text-[#F5F0E8B3] cursor-pointer leading-snug"
                   >
-                    <span className="font-medium text-stone-800">
+                    <span className="font-medium text-[#F5F0E8]">
                       Can we share this publicly?
                     </span>{" "}
                     Your testimony may appear on our Prayer Wall or website to
@@ -370,7 +370,7 @@ export default function TestimoniesPage() {
                   )}
                 </button>
 
-                <p className="text-xs text-center text-stone-400">
+                <p className="text-xs text-center text-[#F5F0E8B3]">
                   All submissions are reviewed before publication.
                 </p>
               </form>
@@ -401,7 +401,7 @@ export default function TestimoniesPage() {
               {...fadeUp}
               transition={{ duration: 0.5, delay: 0.2 }}
             >
-              <h3 className="font-display text-xl font-bold text-stone-900 mb-4">
+              <h3 className="font-display text-xl font-bold text-[#F5F0E8] mb-4">
                 Why share your story?
               </h3>
               <ul className="space-y-4">
@@ -411,10 +411,10 @@ export default function TestimoniesPage() {
                       <Icon className="h-4 w-4 text-primary" />
                     </div>
                     <div>
-                      <p className="text-sm font-semibold text-stone-800">
+                      <p className="text-sm font-semibold text-[#F5F0E8]">
                         {title}
                       </p>
-                      <p className="text-sm text-stone-500 mt-0.5">{body}</p>
+                      <p className="text-sm text-[#F5F0E8B3] mt-0.5">{body}</p>
                     </div>
                   </li>
                 ))}
@@ -426,10 +426,10 @@ export default function TestimoniesPage() {
               {...fadeUp}
               transition={{ duration: 0.5, delay: 0.3 }}
             >
-              <h3 className="font-display text-base font-bold text-stone-900 mb-3">
+              <h3 className="font-display text-base font-bold text-[#F5F0E8] mb-3">
                 From our community
               </h3>
-              <div className="space-y-3">
+            <div className="space-y-3">
                 {featuredTestimonies.map((t) => (
                   <TestimonyMiniCard key={t.id} testimony={t} />
                 ))}

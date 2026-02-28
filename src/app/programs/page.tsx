@@ -9,10 +9,10 @@ import { ArrowRight } from "lucide-react";
 export default function ProgramsPage() {
   return (
     <>
-      <section className="pt-28 pb-16 bg-muted/30">
+      <section className="pt-28 pb-16 bg-gradient-to-b from-[#1A1208] via-transparent to-[#050302]">
         <div className="max-w-4xl mx-auto px-4">
           <motion.h1
-            className="font-display text-4xl md:text-5xl font-bold text-stone-900"
+            className="font-display text-4xl md:text-5xl font-bold text-[#F5F0E8]"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
@@ -20,7 +20,7 @@ export default function ProgramsPage() {
             Our Programs
           </motion.h1>
           <motion.p
-            className="mt-4 text-xl text-muted-foreground"
+            className="mt-4 text-xl text-[#F5F0E8B3]"
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
@@ -31,7 +31,7 @@ export default function ProgramsPage() {
         </div>
       </section>
 
-      <section className="py-12 bg-white">
+      <section className="py-12 bg-[#0D0A07]">
         <div className="max-w-4xl mx-auto px-4 space-y-6">
           {missions.map((mission, i) => (
             <ProgramCard
@@ -44,10 +44,10 @@ export default function ProgramsPage() {
         </div>
       </section>
 
-      <section className="py-16 bg-muted/30">
+      <section className="py-16 bg-[#0D0A07]">
         <div className="max-w-4xl mx-auto px-4 text-center">
           <motion.p
-            className="text-stone-600 mb-6"
+            className="text-[#F5F0E8B3] mb-6"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}

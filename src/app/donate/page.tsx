@@ -17,18 +17,18 @@ export default function DonatePage() {
       </Suspense>
 
       {/* Donor wall — server component fetching from DB */}
-      <section className="py-16 bg-muted/30">
+      <section className="py-16 bg-[#0D0A07]">
         <div className="max-w-4xl mx-auto px-4 text-center">
-          <h2 className="font-display text-2xl font-semibold text-stone-900">
+          <h2 className="font-display text-2xl font-semibold text-[#F5F0E8]">
             With Gratitude
           </h2>
-          <p className="mt-2 text-muted-foreground">
+          <p className="mt-2 text-[#F5F0E8B3]">
             Our donors and partners make this work possible. Thank you.
           </p>
 
           <Suspense
             fallback={
-              <p className="mt-6 text-stone-400 text-sm animate-pulse">
+              <p className="mt-6 text-[#F5F0E8B3] text-sm animate-pulse">
                 Loading donor wall…
               </p>
             }

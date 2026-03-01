@@ -90,9 +90,9 @@ export function Footer() {
               <Image
                 src="/logo/logo.png"
                 alt=""
-                width={200}
-                height={64}
-                className="h-12 w-auto object-contain object-left invert brightness-110"
+                width={260}
+                height={80}
+                className="h-14 w-auto object-contain object-left invert brightness-110 drop-shadow-[0_1px_3px_rgba(0,0,0,0.4)]"
               />
             </Link>
             <p className="mt-3 text-white/80 text-sm max-w-xs">

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Playfair_Display } from "next/font/google";
 import "./globals.css";
+import { ThemeProvider } from "@/components/providers/ThemeProvider";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { AnnouncementBanner } from "@/components/layout/AnnouncementBanner";
@@ -44,16 +45,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${inter.variable} ${playfair.variable}`}>
-      <body className="min-h-screen flex flex-col bg-[#0d0a07] text-[#f5f0e8] font-sans">
-        <SessionProvider>
-          <AnnouncementBanner />
-          <Navbar />
-          <main className="flex-1 text-[#f5f0e8]">{children}</main>
-          <Footer />
-          <BackToTop />
-          <CookieConsent />
-        </SessionProvider>
+    <html lang="en" className={`${inter.variable} ${playfair.variable}`} suppressHydrationWarning>
+      <body className="min-h-screen flex flex-col font-sans theme-transition">
+        <ThemeProvider>
+          <SessionProvider>
+            <AnnouncementBanner />
+            <Navbar />
+            <main className="flex-1">{children}</main>
+            <Footer />
+            <BackToTop />
+            <CookieConsent />
+          </SessionProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

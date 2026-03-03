@@ -40,7 +40,7 @@ export default function PortalLoginPage() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-muted/30 px-4">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-[#1A1208] via-[#0D0A07] to-black px-4">
       <motion.div
         className="w-full max-w-md bg-white rounded-2xl shadow-lg border border-stone-200 p-8"
         initial={{ opacity: 0, y: 20 }}
@@ -50,7 +50,7 @@ export default function PortalLoginPage() {
         <h1 className="font-display text-2xl font-bold text-stone-900 text-center">
           Donor Portal
         </h1>
-        <p className="mt-2 text-center text-muted-foreground text-sm">
+        <p className="mt-2 text-center text-stone-500 text-sm">
           Sign in to view your giving history and receipts.
         </p>
         <form onSubmit={handleSubmit} className="mt-8 space-y-4">
@@ -64,7 +64,7 @@ export default function PortalLoginPage() {
               required
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full px-4 py-2.5 rounded-xl border border-stone-200 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none"
+              className="w-full px-4 py-2.5 rounded-xl border border-primary/50 bg-[#FDFBF7] text-stone-900 placeholder:text-stone-400 focus:border-primary focus:ring-2 focus:ring-primary/25 outline-none"
               placeholder="you@example.com"
             />
           </div>
@@ -78,7 +78,7 @@ export default function PortalLoginPage() {
               required
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full px-4 py-2.5 rounded-xl border border-stone-200 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none"
+              className="w-full px-4 py-2.5 rounded-xl border border-primary/50 bg-[#FDFBF7] text-stone-900 placeholder:text-stone-400 focus:border-primary focus:ring-2 focus:ring-primary/25 outline-none"
               placeholder="••••••••"
             />
           </div>

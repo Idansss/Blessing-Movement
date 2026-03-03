@@ -45,9 +45,9 @@ function NewsletterSection() {
   }
 
   return (
-    <section className="py-20 bg-gradient-hero relative overflow-hidden">
-      <div className="absolute inset-0 grain-overlay opacity-20" />
-      <div className="relative z-10 max-w-3xl mx-auto px-4 text-center text-white">
+    <section className="py-20 bg-[var(--background-secondary)] dark:bg-gradient-hero relative overflow-hidden">
+      <div className="absolute inset-0 grain-overlay opacity-20 dark:opacity-20" />
+      <div className="relative z-10 max-w-3xl mx-auto px-4 text-center text-[var(--text-primary)] dark:text-white">
         <motion.h2
           className="font-display text-3xl md:text-4xl font-bold"
           {...fadeUp}
@@ -55,7 +55,7 @@ function NewsletterSection() {
           Become a Blessing
         </motion.h2>
         <motion.p
-          className="mt-4 text-lg text-white/90"
+          className="mt-4 text-lg text-[var(--text-secondary)] dark:text-white/90"
           {...fadeUp}
           transition={{ duration: 0.5, delay: 0.1 }}
         >
@@ -67,7 +67,7 @@ function NewsletterSection() {
           transition={{ duration: 0.5, delay: 0.2 }}
         >
           {status === "success" ? (
-            <p className="text-lg font-semibold text-accent">You&apos;re in! Welcome to the movement 🎉</p>
+            <p className="text-lg font-semibold text-[var(--accent-gold)] dark:text-accent">You&apos;re in! Welcome to the movement 🎉</p>
           ) : (
             <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3">
               <input
@@ -76,19 +76,19 @@ function NewsletterSection() {
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="Your email address"
                 required
-                className="flex-1 px-4 py-3 rounded-full bg-white/10 border border-white/30 placeholder:text-white/70 text-white outline-none focus:border-accent"
+                className="flex-1 px-4 py-3 rounded-full bg-[var(--surface)] dark:bg-white/10 border border-[var(--border)] dark:border-white/30 placeholder:text-[var(--text-muted)] dark:placeholder:text-white/70 text-[var(--text-primary)] dark:text-white outline-none focus:border-[var(--accent-gold)] dark:focus:border-accent"
               />
               <button
                 type="submit"
                 disabled={status === "loading"}
-                className="px-6 py-3 rounded-full bg-accent text-accent-foreground font-semibold hover:bg-accent-light transition-colors disabled:opacity-60 flex items-center justify-center gap-2"
+                className="px-6 py-3 rounded-full bg-[var(--accent-gold)] dark:bg-accent text-[var(--text-primary)] dark:text-accent-foreground font-semibold hover:opacity-90 dark:hover:bg-accent-light transition-colors disabled:opacity-60 flex items-center justify-center gap-2"
               >
                 {status === "loading" ? <Loader2 className="h-4 w-4 animate-spin" /> : "Join"}
               </button>
             </form>
           )}
           {status === "error" && (
-            <p className="mt-2 text-sm text-white/80">Something went wrong. Please try again.</p>
+            <p className="mt-2 text-sm text-[var(--text-secondary)] dark:text-white/80">Something went wrong. Please try again.</p>
           )}
         </motion.div>
       </div>
@@ -107,7 +107,7 @@ export default function HomePage() {
     <>
       {/* Hero */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-hero">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(5,5,5,0.92),_rgba(0,0,0,0.98))]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(5,5,5,0.92),_rgba(0,0,0,0.98))] opacity-45 dark:opacity-100 transition-opacity duration-300" />
         <div className="absolute inset-0 grain-overlay opacity-40" />
         <Image
           src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=1920&q=80&auto=format&fit=crop"
@@ -174,28 +174,28 @@ export default function HomePage() {
       </section>
 
       {/* Stats */}
-      <section className="py-16 bg-gradient-to-b from-[#1A1208] via-transparent to-[#050302]">
+      <section className="py-16 bg-[var(--background-secondary)] dark:bg-gradient-to-b dark:from-[#1A1208] dark:via-transparent dark:to-[#050302]">
         <div className="max-w-5xl mx-auto px-4">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            <StatCounter value={2500} label="Lives Touched" className="glass-dark py-6" />
-            <StatCounter value={12} label="Countries Reached" className="glass-dark py-6" />
-            <StatCounter value={180} suffix="+" label="Volunteers" className="glass-dark py-6" />
-            <StatCounter value={45} label="Outreaches Completed" className="glass-dark py-6" />
+            <StatCounter value={2500} label="Lives Touched" className="section-card py-6" />
+            <StatCounter value={12} label="Countries Reached" className="section-card py-6" />
+            <StatCounter value={180} suffix="+" label="Volunteers" className="section-card py-6" />
+            <StatCounter value={45} label="Outreaches Completed" className="section-card py-6" />
           </div>
         </div>
       </section>
 
       {/* Mission cards */}
-      <section className="py-20 bg-[#0D0A07]">
+      <section className="py-20 bg-[var(--background)]">
         <div className="max-w-6xl mx-auto px-4">
           <motion.h2
-            className="font-display text-3xl md:text-4xl font-bold text-center text-[#F5F0E8]"
+            className="font-display text-3xl md:text-4xl font-bold text-center text-[var(--text-primary)]"
             {...fadeUp}
           >
             Our Missions
           </motion.h2>
           <motion.p
-            className="mt-2 text-center text-muted-foreground max-w-2xl mx-auto text-[#F5F0E8B3]"
+            className="mt-2 text-center max-w-2xl mx-auto text-[var(--text-secondary)]"
             {...fadeUp}
             transition={{ duration: 0.5, delay: 0.1 }}
           >
@@ -214,18 +214,18 @@ export default function HomePage() {
                 >
                   <Link
                     href="/programs"
-                    className="block glass-dark p-6 transition-all duration-300 group"
+                    className="block section-card p-6 transition-all duration-300 group hover:shadow-[0_8px_32px_var(--shadow)] dark:hover:shadow-[0_0_26px_rgba(212,175,55,0.3)]"
                   >
-                    <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-primary/10 text-primary group-hover:bg-primary group-hover:text-white transition-colors">
+                    <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-[var(--accent-gold)]/15 text-[var(--accent-gold)] dark:bg-primary/10 dark:text-primary group-hover:bg-[var(--accent-gold)] group-hover:text-[var(--text-primary)] dark:group-hover:bg-primary dark:group-hover:text-white transition-colors">
                       <Icon className="h-7 w-7" />
                     </div>
-                    <h3 className="mt-4 font-display text-xl font-semibold text-[#F5F0E8]">
+                    <h3 className="mt-4 font-display text-xl font-semibold text-[var(--text-primary)]">
                       {m.title}
                     </h3>
-                    <p className="mt-2 text-sm text-[#F5F0E8B3] line-clamp-2">
+                    <p className="mt-2 text-sm text-[var(--text-secondary)] line-clamp-2">
                       {m.description}
                     </p>
-                    <span className="mt-4 inline-flex items-center gap-1 text-accent font-semibold text-sm group-hover:gap-2 transition-all">
+                    <span className="mt-4 inline-flex items-center gap-1 text-[var(--accent-gold)] dark:text-accent font-semibold text-sm group-hover:gap-2 transition-all">
                       Learn more
                       <ArrowRight className="h-4 w-4" />
                     </span>
@@ -238,10 +238,10 @@ export default function HomePage() {
       </section>
 
       {/* What We Do - alternating */}
-      <section className="py-20 bg-[#0D0A07]">
+      <section className="py-20 bg-[var(--background-secondary)]">
         <div className="max-w-6xl mx-auto px-4">
           <motion.h2
-            className="font-display text-3xl md:text-4xl font-bold text-center text-[#F5F0E8]"
+            className="font-display text-3xl md:text-4xl font-bold text-center text-[var(--text-primary)]"
             {...fadeUp}
           >
             What We Do
@@ -266,13 +266,13 @@ export default function HomePage() {
                   />
                 </div>
                 <div className="flex-1">
-                  <h3 className="font-display text-2xl font-semibold text-[#F5F0E8]">
+                  <h3 className="font-display text-2xl font-semibold text-[var(--text-primary)]">
                     {m.subtitle}
                   </h3>
-                  <p className="mt-3 text-[#F5F0E8B3]">{m.description}</p>
+                  <p className="mt-3 text-[var(--text-secondary)]">{m.description}</p>
                   <Link
                     href="/programs"
-                    className="mt-4 inline-flex items-center gap-2 text-accent font-semibold hover:underline"
+                    className="mt-4 inline-flex items-center gap-2 text-[var(--accent-gold)] dark:text-accent font-semibold hover:underline"
                   >
                     Explore program
                     <ArrowRight className="h-4 w-4" />
@@ -285,16 +285,16 @@ export default function HomePage() {
       </section>
 
       {/* Testimonies */}
-      <section className="py-20 bg-[#0D0A07]">
+      <section className="py-20 bg-[var(--background)]">
         <div className="max-w-4xl mx-auto px-4">
           <motion.h2
-            className="font-display text-3xl md:text-4xl font-bold text-center text-[#F5F0E8]"
+            className="font-display text-3xl md:text-4xl font-bold text-center text-[var(--text-primary)]"
             {...fadeUp}
           >
             Stories of Impact
           </motion.h2>
           <motion.p
-            className="mt-2 text-center text-[#F5F0E8B3]"
+            className="mt-2 text-center text-[var(--text-secondary)]"
             {...fadeUp}
             transition={{ duration: 0.5, delay: 0.1 }}
           >
@@ -310,7 +310,7 @@ export default function HomePage() {
           <div className="mt-8 text-center">
             <Link
               href="/contact#testimonies"
-              className="text-primary font-semibold hover:underline"
+              className="text-[var(--accent-purple)] dark:text-primary font-semibold hover:underline"
             >
               Share your testimony →
             </Link>
@@ -319,18 +319,18 @@ export default function HomePage() {
       </section>
 
       {/* Upcoming Events */}
-      <section className="py-20 bg-[#0D0A07]">
+      <section className="py-20 bg-[var(--background-secondary)]">
         <div className="max-w-6xl mx-auto px-4">
                 <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
                 <div>
               <motion.h2
-                    className="font-display text-3xl md:text-4xl font-bold text-[#F5F0E8]"
+                    className="font-display text-3xl md:text-4xl font-bold text-[var(--text-primary)]"
                 {...fadeUp}
               >
                 Upcoming Events
               </motion.h2>
                   <motion.p
-                    className="mt-2 text-[#F5F0E8B3]"
+                    className="mt-2 text-[var(--text-secondary)]"
                 {...fadeUp}
                 transition={{ duration: 0.5, delay: 0.1 }}
               >
@@ -339,7 +339,7 @@ export default function HomePage() {
             </div>
             <Link
               href="/events"
-              className="inline-flex items-center gap-2 text-accent font-semibold hover:underline"
+              className="inline-flex items-center gap-2 text-[var(--accent-gold)] dark:text-accent font-semibold hover:underline"
             >
               View all events
               <ArrowRight className="h-4 w-4" />

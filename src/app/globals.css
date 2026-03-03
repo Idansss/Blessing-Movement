@@ -2,34 +2,93 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ---------------------------------------------------------------------------
+   Light mode (default when class="light" or no theme)
+   --------------------------------------------------------------------------- */
+:root {
+  --background: #FBF7F0;
+  --background-secondary: #F2EBE0;
+  --surface: #FFFFFF;
+  --surface-muted: #EDE4D8;
+
+  --text-primary: #1A0F00;
+  --text-secondary: #5C4A32;
+  --text-muted: #8C7355;
+
+  --accent-gold: #B8860B;
+  --accent-orange: #C4611A;
+  --accent-purple: #3D0A7A;
+
+  --border: #D4C4A8;
+  --shadow: rgba(90, 60, 20, 0.12);
+
+  /* Legacy / Tailwind compatibility */
+  --primary: 279 60% 26%;
+  --primary-foreground: 42 42% 96%;
+  --accent: 45 60% 52%;
+  --accent-foreground: 24 22% 10%;
+  --foreground: 24 22% 10%;
+  --muted: 33 25% 92%;
+  --muted-foreground: 30 15% 40%;
+}
+
+/* ---------------------------------------------------------------------------
+   Dark mode (when class="dark" on html)
+   --------------------------------------------------------------------------- */
+.dark {
+  --background: #0D0A07;
+  --background-secondary: #1A1208;
+  --surface: rgba(10, 7, 3, 0.75);
+  --surface-muted: #1C1508;
+
+  --text-primary: #F5F0E8;
+  --text-secondary: #C8B89A;
+  --text-muted: #A89A84;
+
+  --accent-gold: #D4AF37;
+  --accent-orange: #E8732A;
+  --accent-purple: #5C3473;
+
+  --border: rgba(212, 175, 55, 0.2);
+  --shadow: rgba(0, 0, 0, 0.4);
+
+  --primary: 279 60% 26%;
+  --primary-foreground: 42 42% 96%;
+  --accent: 45 60% 52%;
+  --accent-foreground: 24 22% 10%;
+  --foreground: 42 42% 96%;
+  --muted: 30 25% 10%;
+  --muted-foreground: 33 18% 70%;
+}
+
+/* ---------------------------------------------------------------------------
+   Base – use CSS variables for theme-aware colors
+   --------------------------------------------------------------------------- */
 @layer base {
-  :root {
-    /* Cinematic dark faith palette */
-    --primary: 279 60% 26%; /* deep royal purple */
-    --primary-foreground: 42 42% 96%; /* warm white */
-    --accent: 45 60% 52%; /* warm gold */
-    --accent-foreground: 24 22% 10%;
-    --background: 30 40% 4%; /* near-black brown */
-    --foreground: 42 42% 96%; /* warm white */
-    --muted: 30 25% 10%;
-    --muted-foreground: 33 18% 70%;
-  }
   html {
     scroll-behavior: smooth;
-    color: #f5f0e8;
-    background-color: #0d0a07;
     font-family: var(--font-inter), system-ui, -apple-system, sans-serif;
   }
+
+  html,
   body {
-    @apply antialiased;
-    background-color: #0d0a07;
+    background-color: var(--background);
+    color: var(--text-primary);
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  .dark body {
     background-image:
       radial-gradient(circle at 15% 0%, rgba(212, 175, 55, 0.18), transparent 55%),
       radial-gradient(circle at 85% 10%, rgba(232, 115, 42, 0.16), transparent 55%),
       radial-gradient(circle at 50% 120%, rgba(6, 95, 70, 0.24), transparent 70%);
-    color: #f5f0e8;
-    font-family: var(--font-inter), system-ui, -apple-system, sans-serif;
   }
+}
+
+/* Smooth theme transitions for theme-dependent properties */
+.theme-transition,
+.theme-transition * {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 /* Grain overlay for cinematic texture */
@@ -42,12 +101,53 @@
   z-index: 0;
 }
 
+/* Dark glass card (dark mode) */
 .glass-dark {
-  /* Dark glass card used across sections */
   background-color: rgba(10, 7, 3, 0.78);
   -webkit-backdrop-filter: blur(18px);
   backdrop-filter: blur(18px);
   border-radius: 1.25rem;
+  border: 1px solid rgba(212, 175, 55, 0.24);
+  box-shadow: 0 0 20px rgba(212, 175, 55, 0.16);
+}
+
+.dark .glass-dark {
+  background-color: rgba(10, 7, 3, 0.78);
+  border: 1px solid rgba(212, 175, 55, 0.24);
+  box-shadow: 0 0 20px rgba(212, 175, 55, 0.16);
+}
+
+/* Light mode card – warm white glass */
+.glass-light {
+  background-color: rgba(255, 255, 255, 0.85);
+  -webkit-backdrop-filter: blur(18px);
+  backdrop-filter: blur(18px);
+  border-radius: 1.25rem;
+  border: 1px solid var(--border);
+  box-shadow: 0 4px 24px var(--shadow);
+}
+
+:root .glass-light,
+.light .glass-light {
+  background-color: rgba(255, 255, 255, 0.85);
+  border: 1px solid var(--border);
+  box-shadow: 0 4px 24px var(--shadow);
+}
+
+/* Theme-aware card: light = white + warm border, dark = glass */
+.section-card {
+  border-radius: 1.25rem;
+}
+:root .section-card,
+.light .section-card {
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  box-shadow: 0 4px 24px var(--shadow);
+}
+.dark .section-card {
+  background-color: rgba(10, 7, 3, 0.78);
+  -webkit-backdrop-filter: blur(18px);
+  backdrop-filter: blur(18px);
   border: 1px solid rgba(212, 175, 55, 0.24);
   box-shadow: 0 0 20px rgba(212, 175, 55, 0.16);
 }

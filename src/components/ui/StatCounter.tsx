@@ -51,12 +51,12 @@ export function StatCounter({
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
     >
-      <div className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-accent">
+      <div className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-[var(--accent-gold)] dark:text-accent">
         {prefix}
         {count.toLocaleString()}
         {suffix}
       </div>
-      <div className="mt-1 text-sm md:text-base text-[#F5F0E8CC] font-medium">
+      <div className="mt-1 text-sm md:text-base text-[var(--text-secondary)] font-medium">
         {label}
       </div>
     </motion.div>

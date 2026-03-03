@@ -1,6 +1,7 @@
 import type { Config } from "tailwindcss";
 
 const config: Config = {
+  darkMode: "class",
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
@@ -9,14 +10,26 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
+        /* Theme-aware semantic colors (use in components) */
+        background: "var(--background)",
+        "background-secondary": "var(--background-secondary)",
+        surface: "var(--surface)",
+        "surface-muted": "var(--surface-muted)",
+        "text-primary": "var(--text-primary)",
+        "text-secondary": "var(--text-secondary)",
+        "text-muted": "var(--text-muted)",
+        "accent-gold": "var(--accent-gold)",
+        "accent-orange": "var(--accent-orange)",
+        "accent-purple": "var(--accent-purple)",
+        border: "var(--border)",
         primary: {
-          DEFAULT: "#3B214B", // deep royal purple
+          DEFAULT: "#3B214B",
           foreground: "#F5F0E8",
           light: "#5C3473",
           dark: "#241331",
         },
         accent: {
-          DEFAULT: "#D4AF37", // warm gold
+          DEFAULT: "#D4AF37",
           foreground: "#1A1208",
           light: "#E5C65C",
           dark: "#C8860A",

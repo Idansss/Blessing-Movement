@@ -43,19 +43,19 @@ export function CountdownTimer({ targetDate, eventTitle, eventSlug }: CountdownT
   return (
     <a
       href={`/events/${eventSlug}`}
-      className="inline-flex flex-col sm:flex-row items-center gap-3 mt-6 rounded-2xl border border-white/20 bg-white/10 backdrop-blur-sm px-6 py-4 hover:bg-white/15 transition-colors"
+      className="inline-flex flex-col sm:flex-row items-center gap-3 mt-6 rounded-2xl border border-[var(--border)] dark:border-white/20 bg-white/90 dark:bg-white/10 backdrop-blur-md dark:backdrop-blur-sm px-6 py-4 hover:bg-white dark:hover:bg-white/15 transition-colors shadow-[0_4px_24px_var(--shadow)] dark:shadow-none"
     >
-      <div className="flex items-center gap-2 text-white/80 text-sm">
+      <div className="flex items-center gap-2 text-[var(--text-secondary)] dark:text-white/80 text-sm">
         <Clock className="h-4 w-4" />
         <span>Next event · {eventTitle}</span>
       </div>
       <div className="flex gap-3">
         {units.map(({ label, value }) => (
           <div key={label} className="text-center min-w-[44px]">
-            <div className="font-display text-2xl font-bold text-white leading-none">
+            <div className="font-display text-2xl font-bold text-[var(--text-primary)] dark:text-white leading-none">
               {String(value).padStart(2, "0")}
             </div>
-            <div className="text-xs text-white/60 mt-0.5">{label}</div>
+            <div className="text-xs text-[var(--text-muted)] dark:text-white/60 mt-0.5">{label}</div>
           </div>
         ))}
       </div>

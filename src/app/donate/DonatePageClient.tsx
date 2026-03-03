@@ -39,17 +39,17 @@ export function DonatePageClient() {
 
   if (paymentSuccess) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-muted/30 px-4">
+      <div className="min-h-screen flex items-center justify-center bg-[var(--background-secondary)] dark:bg-muted/30 px-4">
         <motion.div
-          className="max-w-md w-full bg-white rounded-2xl border border-stone-200 shadow-lg p-8 text-center"
+          className="max-w-md w-full bg-[var(--surface)] dark:bg-white rounded-2xl border border-[var(--border)] dark:border-stone-200 shadow-[0_4px_24px_var(--shadow)] dark:shadow-lg p-8 text-center"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
         >
-          <CheckCircle className="h-16 w-16 text-primary mx-auto mb-4" />
-          <h1 className="font-display text-2xl font-bold text-stone-900">
+          <CheckCircle className="h-16 w-16 text-[var(--accent-purple)] dark:text-primary mx-auto mb-4" />
+          <h1 className="font-display text-2xl font-bold text-[var(--text-primary)]">
             Thank you for your gift
           </h1>
-          <p className="mt-2 text-muted-foreground">
+          <p className="mt-2 text-[var(--text-secondary)] dark:text-muted-foreground">
             Your payment was successful. View your receipt and giving history in your donor portal.
           </p>
           <div className="mt-6 flex flex-col sm:flex-row gap-3 justify-center">
@@ -61,7 +61,7 @@ export function DonatePageClient() {
             </Link>
             <Link
               href="/donate"
-              className="rounded-xl border border-stone-200 px-5 py-2.5 font-medium text-stone-700 hover:bg-muted transition-colors"
+              className="rounded-xl border border-[var(--border)] dark:border-stone-200 px-5 py-2.5 font-medium text-[var(--text-primary)] dark:text-stone-700 hover:bg-[var(--surface-muted)] dark:hover:bg-muted transition-colors"
             >
               Give again
             </Link>
@@ -73,10 +73,10 @@ export function DonatePageClient() {
 
   return (
     <>
-      <section className="pt-28 pb-16 bg-gradient-to-b from-[#1A1208] via-transparent to-[#050302]">
+      <section className="pt-28 pb-16 bg-[var(--background-secondary)] dark:bg-gradient-to-b dark:from-[#1A1208] dark:via-transparent dark:to-[#050302]">
         <div className="max-w-4xl mx-auto px-4">
           <motion.h1
-            className="font-display text-4xl md:text-5xl font-bold text-[#F5F0E8]"
+            className="font-display text-4xl md:text-5xl font-bold text-[var(--text-primary)]"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
@@ -84,7 +84,7 @@ export function DonatePageClient() {
             Give
           </motion.h1>
           <motion.p
-            className="mt-4 text-xl text-[#F5F0E8B3]"
+            className="mt-4 text-xl text-[var(--text-secondary)]"
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
@@ -94,21 +94,21 @@ export function DonatePageClient() {
         </div>
       </section>
 
-      <section className="py-12 bg-[#0D0A07]">
+      <section className="py-12 bg-[var(--background)] dark:bg-[#0D0A07]">
         <div className="max-w-4xl mx-auto px-4">
           <motion.div
-            className="rounded-2xl glass-dark p-6 md:p-8 mb-10"
+            className="rounded-2xl section-card p-6 md:p-8 mb-10"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
           >
-            <h2 className="font-display text-2xl font-semibold text-[#F5F0E8] mb-4">
+            <h2 className="font-display text-2xl font-semibold text-[var(--text-primary)] mb-4">
               Your gift makes an impact
             </h2>
             <ul className="space-y-2">
               {impactStatements.map((s, i) => (
-                <li key={i} className="flex items-center gap-2 text-[#F5F0E8B3]">
-                  <Heart className="h-4 w-4 text-accent flex-shrink-0" />
+                <li key={i} className="flex items-center gap-2 text-[var(--text-secondary)]">
+                  <Heart className="h-4 w-4 text-[var(--accent-gold)] dark:text-accent flex-shrink-0" />
                   {s}
                 </li>
               ))}
@@ -116,7 +116,7 @@ export function DonatePageClient() {
           </motion.div>
 
           <motion.div
-            className="max-w-2xl glass-dark p-6 md:p-8 rounded-2xl"
+            className="max-w-2xl section-card p-6 md:p-8 rounded-2xl"
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
@@ -127,8 +127,8 @@ export function DonatePageClient() {
                 onClick={() => setFrequency("once")}
                 className={`flex-1 py-3 rounded-xl font-medium transition-colors ${
                   frequency === "once"
-                    ? "bg-accent text-accent-foreground shadow-[0_0_18px_rgba(212,175,55,0.5)]"
-                    : "bg-[#1C1508] text-[#F5F0E8B3] hover:bg-[#2A1C0C]"
+                    ? "bg-[var(--accent-gold)] dark:bg-accent text-[var(--text-primary)] dark:text-accent-foreground shadow-[0_0_18px_rgba(184,134,11,0.4)] dark:shadow-[0_0_18px_rgba(212,175,55,0.5)]"
+                    : "bg-[var(--surface-muted)] dark:bg-[#1C1508] text-[var(--text-secondary)] dark:text-[#F5F0E8B3] hover:bg-[var(--border)]/50 dark:hover:bg-[#2A1C0C]"
                 }`}
               >
                 One-time
@@ -138,8 +138,8 @@ export function DonatePageClient() {
                 onClick={() => setFrequency("monthly")}
                 className={`flex-1 py-3 rounded-xl font-medium transition-colors ${
                   frequency === "monthly"
-                    ? "bg-accent text-accent-foreground shadow-[0_0_18px_rgba(212,175,55,0.5)]"
-                    : "bg-[#1C1508] text-[#F5F0E8B3] hover:bg-[#2A1C0C]"
+                    ? "bg-[var(--accent-gold)] dark:bg-accent text-[var(--text-primary)] dark:text-accent-foreground shadow-[0_0_18px_rgba(184,134,11,0.4)] dark:shadow-[0_0_18px_rgba(212,175,55,0.5)]"
+                    : "bg-[var(--surface-muted)] dark:bg-[#1C1508] text-[var(--text-secondary)] dark:text-[#F5F0E8B3] hover:bg-[var(--border)]/50 dark:hover:bg-[#2A1C0C]"
                 }`}
               >
                 Monthly (Blessings Builders)
@@ -153,7 +153,7 @@ export function DonatePageClient() {
 
             <div className="mt-8 space-y-4">
               <div>
-                <label htmlFor="donor-name" className="block text-sm font-medium text-[#F5F0E8] mb-1">
+                <label htmlFor="donor-name" className="block text-sm font-medium text-[var(--text-primary)] mb-1">
                   Name (optional, for receipt)
                 </label>
                 <input
@@ -161,12 +161,12 @@ export function DonatePageClient() {
                   type="text"
                   value={donorName}
                   onChange={(e) => setDonorName(e.target.value)}
-                  className="w-full px-4 py-2.5 rounded-xl border border-stone-200 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none"
+                  className="w-full px-4 py-2.5 rounded-xl border border-[var(--border)] dark:border-stone-200 bg-[var(--surface)] dark:bg-transparent text-[var(--text-primary)] focus:border-[var(--accent-gold)] dark:focus:border-primary focus:ring-2 focus:ring-[var(--accent-gold)]/20 dark:focus:ring-primary/20 outline-none"
                   placeholder="Your name"
                 />
               </div>
               <div>
-                <label htmlFor="donor-email" className="block text-sm font-medium text-[#F5F0E8] mb-1">
+                <label htmlFor="donor-email" className="block text-sm font-medium text-[var(--text-primary)] mb-1">
                   Email *
                 </label>
                 <input
@@ -175,7 +175,7 @@ export function DonatePageClient() {
                   required
                   value={donorEmail}
                   onChange={(e) => setDonorEmail(e.target.value)}
-                  className="w-full px-4 py-2.5 rounded-xl border border-stone-200 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none"
+                  className="w-full px-4 py-2.5 rounded-xl border border-[var(--border)] dark:border-stone-200 bg-[var(--surface)] dark:bg-transparent text-[var(--text-primary)] focus:border-[var(--accent-gold)] dark:focus:border-primary focus:ring-2 focus:ring-[var(--accent-gold)]/20 dark:focus:ring-primary/20 outline-none"
                   placeholder="your@email.com"
                 />
               </div>
@@ -185,11 +185,11 @@ export function DonatePageClient() {
               <p className="mt-4 text-sm text-red-600">{error}</p>
             )}
 
-            <div className="mt-6 p-4 rounded-xl bg-[#1C1508] flex items-start gap-3">
-              <Shield className="h-5 w-5 text-accent flex-shrink-0 mt-0.5" />
-              <p className="text-sm text-[#F5F0E8B3]">
+            <div className="mt-6 p-4 rounded-xl bg-[var(--surface-muted)] dark:bg-[#1C1508] flex items-start gap-3">
+              <Shield className="h-5 w-5 text-[var(--accent-gold)] dark:text-accent flex-shrink-0 mt-0.5" />
+              <p className="text-sm text-[var(--text-secondary)]">
                 Secure payment via Paystack. Your details are protected. View receipts in your{" "}
-                <Link href="/portal" className="text-primary font-medium hover:underline">
+                <Link href="/portal" className="text-[var(--accent-purple)] dark:text-primary font-medium hover:underline">
                   donor portal
                 </Link>
                 .
@@ -230,9 +230,9 @@ export function DonatePageClient() {
             >
               {loading ? "Redirecting to payment…" : "Continue to payment"}
             </button>
-            <p className="mt-3 text-center text-sm text-[#F5F0E8B3]">
+            <p className="mt-3 text-center text-sm text-[var(--text-secondary)]">
               Powered by Paystack. You can also{" "}
-              <Link href="/portal" className="text-primary hover:underline">
+              <Link href="/portal" className="text-[var(--accent-purple)] dark:text-primary hover:underline">
                 sign in
               </Link>{" "}
               to see your giving history.

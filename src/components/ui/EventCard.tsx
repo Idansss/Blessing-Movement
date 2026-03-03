@@ -39,7 +39,7 @@ export function EventCard({ event, index = 0, className }: EventCardProps) {
     <>
       <motion.article
         className={cn(
-          "group rounded-2xl overflow-hidden glass-dark hover:shadow-[0_0_26px_rgba(212,175,55,0.3)] transition-all duration-300",
+          "group rounded-2xl overflow-hidden section-card hover:shadow-[0_8px_32px_var(--shadow)] dark:hover:shadow-[0_0_26px_rgba(212,175,55,0.3)] transition-all duration-300",
           className
         )}
         initial={{ opacity: 0, y: 20 }}
@@ -71,7 +71,7 @@ export function EventCard({ event, index = 0, className }: EventCardProps) {
           </div>
         </div>
         <div className="p-4">
-          <div className="flex flex-wrap gap-3 text-sm text-[#F5F0E8B3]">
+          <div className="flex flex-wrap gap-3 text-sm text-[var(--text-secondary)]">
             <span className="flex items-center gap-1">
               <Calendar className="h-4 w-4" />
               {new Date(event.date).toLocaleDateString("en-NG", {
@@ -87,7 +87,7 @@ export function EventCard({ event, index = 0, className }: EventCardProps) {
               {event.location}
             </span>
           </div>
-          <p className="mt-2 text-sm text-[#F5F0E8B3] line-clamp-2">
+          <p className="mt-2 text-sm text-[var(--text-secondary)] line-clamp-2">
             {event.description}
           </p>
           {hasExternalUrl ? (
@@ -95,7 +95,7 @@ export function EventCard({ event, index = 0, className }: EventCardProps) {
               href={event.registerUrl!}
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-3 inline-flex items-center gap-2 text-accent font-semibold text-sm hover:underline"
+              className="mt-3 inline-flex items-center gap-2 text-[var(--accent-gold)] dark:text-accent font-semibold text-sm hover:underline"
             >
               Register / Learn more
               <ExternalLink className="h-4 w-4" />
@@ -104,7 +104,7 @@ export function EventCard({ event, index = 0, className }: EventCardProps) {
             <button
               type="button"
               onClick={() => setModalOpen(true)}
-              className="mt-3 inline-flex items-center gap-2 text-accent font-semibold text-sm hover:underline"
+              className="mt-3 inline-flex items-center gap-2 text-[var(--accent-gold)] dark:text-accent font-semibold text-sm hover:underline"
             >
               Register for this event →
             </button>

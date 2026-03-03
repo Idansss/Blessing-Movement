@@ -48,19 +48,19 @@ export function DonationAmountSelector({
             type="button"
             onClick={() => handleSelect(p.amount)}
             className={cn(
-              "p-4 rounded-xl border-2 text-left transition-all bg-transparent",
+              "p-4 rounded-xl border-2 text-left transition-all",
               selected === p.amount
-                ? "border-accent bg-accent/15 text-accent-foreground shadow-[0_0_18px_rgba(212,175,55,0.45)]"
-                : "border-[#F5F0E8]/40 hover:border-accent/70 text-[#F5F0E8CC]"
+                ? "border-[var(--accent-gold)] dark:border-accent bg-[var(--accent-gold)]/15 dark:bg-accent/15 text-[var(--text-primary)] dark:text-accent-foreground shadow-[0_0_18px_rgba(184,134,11,0.35)] dark:shadow-[0_0_18px_rgba(212,175,55,0.45)]"
+                : "border-[var(--border)] dark:border-[#F5F0E8]/40 hover:border-[var(--accent-gold)]/70 dark:hover:border-accent/70 bg-[var(--surface-muted)]/50 dark:bg-transparent text-[var(--text-secondary)] dark:text-[#F5F0E8CC]"
             )}
           >
             <span className="font-display text-xl font-bold">{p.label}</span>
-            <p className="mt-1 text-xs text-[#F5F0E8B3]">{p.impact}</p>
+            <p className="mt-1 text-xs">{p.impact}</p>
           </button>
         ))}
       </div>
       <div>
-        <label htmlFor="custom-amount" className="block text-sm font-medium text-[#F5F0E8] mb-1">
+        <label htmlFor="custom-amount" className="block text-sm font-medium text-[var(--text-primary)] mb-1">
           Or enter custom amount (₦)
         </label>
         <input
@@ -70,11 +70,11 @@ export function DonationAmountSelector({
           placeholder="e.g. 25000"
           value={customAmount}
           onChange={(e) => handleCustomChange(e.target.value)}
-          className="w-full px-4 py-3 rounded-xl border-2 border-stone-200 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition"
+          className="w-full px-4 py-3 rounded-xl border-2 border-[var(--border)] dark:border-stone-200 bg-[var(--surface)] dark:bg-transparent text-[var(--text-primary)] focus:border-[var(--accent-gold)] dark:focus:border-primary focus:ring-2 focus:ring-[var(--accent-gold)]/20 dark:focus:ring-primary/20 outline-none transition"
         />
       </div>
       {frequency === "monthly" && (
-        <p className="text-sm text-muted-foreground">
+        <p className="text-sm text-[var(--text-muted)] dark:text-muted-foreground">
           This amount will be charged monthly. You can cancel anytime.
         </p>
       )}

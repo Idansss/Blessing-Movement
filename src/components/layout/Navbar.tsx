@@ -4,9 +4,11 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
+import { useTheme } from "next-themes";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { ThemeToggle } from "@/components/ui/ThemeToggle";
 import { PrayerModal } from "@/components/layout/PrayerModal";
 
 const navLinks = [
@@ -26,27 +28,31 @@ const WHATSAPP_NUMBER = "2348000000000";
 
 export function Navbar() {
   const pathname = usePathname();
+  const { resolvedTheme } = useTheme();
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [prayerOpen, setPrayerOpen] = useState(false);
 
   const isHome = pathname === "/";
+  const isLight = resolvedTheme === "light";
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const useLightNav = isHome && !scrolled;
+  const useLightNav = !isLight && isHome && !scrolled;
 
   return (
     <>
       <header
         className={cn(
           "fixed left-0 right-0 top-10 z-50 transition-all duration-300",
-          useLightNav
-            ? "bg-gradient-to-b from-black/60 via-black/30 to-transparent"
-            : "bg-white shadow-md"
+          isLight
+            ? "bg-[var(--background)] shadow-[0_1px_0_var(--border),0_4px_24px_var(--shadow)]"
+            : useLightNav
+              ? "bg-gradient-to-b from-black/60 via-black/30 to-transparent"
+              : "bg-white dark:bg-[var(--surface)] shadow-md"
         )}
       >
         <div className="max-w-7xl mx-auto px-4 flex items-center justify-between h-16">
@@ -57,8 +63,12 @@ export function Navbar() {
               width={260}
               height={80}
               className={cn(
-                "h-14 md:h-16 w-auto object-contain object-left transition-all duration-300 drop-shadow-[0_1px_2px_rgba(0,0,0,0.4)]",
-                useLightNav && "invert brightness-110 drop-shadow-[0_1px_3px_rgba(0,0,0,0.5)]"
+                "h-14 md:h-16 w-auto object-contain object-left transition-all duration-300",
+                isLight
+                  ? "drop-shadow-[0_1px_2px_rgba(90,60,20,0.15)]"
+                  : useLightNav
+                    ? "invert brightness-110 drop-shadow-[0_1px_3px_rgba(0,0,0,0.5)]"
+                    : "drop-shadow-[0_1px_2px_rgba(0,0,0,0.4)]"
               )}
               priority
             />
@@ -70,30 +80,43 @@ export function Navbar() {
                 href={link.href}
                 className={cn(
                   "text-sm font-medium transition-colors",
-                  pathname === link.href
-                    ? useLightNav
-                      ? "text-white font-semibold underline underline-offset-4 decoration-accent"
-                      : "text-primary font-semibold"
-                    : useLightNav
-                      ? "text-white/90 hover:text-white [text-shadow:0_1px_4px_rgba(0,0,0,0.6)]"
-                      : "text-stone-700 hover:text-primary"
+                  isLight
+                    ? pathname === link.href
+                      ? "text-[var(--accent-purple)] font-semibold underline underline-offset-4 decoration-[var(--accent-gold)]"
+                      : "text-[var(--text-secondary)] hover:text-[var(--text-primary)]"
+                    : pathname === link.href
+                      ? useLightNav
+                        ? "text-white font-semibold underline underline-offset-4 decoration-accent"
+                        : "text-primary font-semibold"
+                      : useLightNav
+                        ? "text-white/90 hover:text-white [text-shadow:0_1px_4px_rgba(0,0,0,0.6)]"
+                        : "text-stone-700 hover:text-primary"
                 )}
               >
                 {link.label}
               </Link>
             ))}
           </nav>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-3">
+            <ThemeToggle className="hidden lg:flex" />
             <Link
               href="/donate"
-              className="hidden lg:inline-flex items-center justify-center rounded-full bg-accent px-4 py-2 text-sm font-semibold text-accent-foreground hover:bg-accent-light transition-colors"
+              className={cn(
+                "hidden lg:inline-flex items-center justify-center rounded-full px-4 py-2 text-sm font-semibold transition-colors",
+                isLight
+                  ? "bg-[var(--accent-gold)] text-[var(--text-primary)] hover:opacity-90"
+                  : "bg-accent text-accent-foreground hover:bg-accent-light"
+              )}
             >
               Give Now
             </Link>
             <button
               type="button"
               onClick={() => setOpen(!open)}
-              className={cn("lg:hidden p-2 rounded-lg", useLightNav ? "text-white" : "text-stone-700")}
+              className={cn(
+                "lg:hidden p-2 rounded-lg",
+                isLight ? "text-[var(--text-primary)]" : useLightNav ? "text-white" : "text-stone-700"
+              )}
               aria-label="Toggle menu"
             >
               {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
@@ -106,7 +129,7 @@ export function Navbar() {
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
-              className="lg:hidden bg-white border-t border-stone-200 shadow-lg overflow-hidden"
+              className="lg:hidden bg-[var(--surface)] dark:bg-[var(--surface)] border-t border-[var(--border)] dark:border-stone-200 shadow-lg overflow-hidden"
             >
               <nav className="flex flex-col p-4 gap-2">
                 {navLinks.map((link) => (
@@ -116,19 +139,24 @@ export function Navbar() {
                     onClick={() => setOpen(false)}
                     className={cn(
                       "py-2 px-3 rounded-lg font-medium",
-                      pathname === link.href ? "bg-primary/10 text-primary" : "text-stone-700"
+                      pathname === link.href
+                        ? "bg-primary/10 text-primary dark:bg-primary/10 dark:text-primary"
+                        : "text-[var(--text-primary)] dark:text-stone-700"
                     )}
                   >
                     {link.label}
                   </Link>
                 ))}
-                <Link
-                  href="/donate"
-                  onClick={() => setOpen(false)}
-                  className="mt-2 py-3 px-4 rounded-lg bg-accent text-accent-foreground font-semibold text-center"
-                >
-                  Give Now
-                </Link>
+                <div className="flex items-center gap-2 mt-2">
+                  <ThemeToggle className="lg:hidden" />
+                  <Link
+                    href="/donate"
+                    onClick={() => setOpen(false)}
+                    className="flex-1 py-3 px-4 rounded-lg bg-accent text-accent-foreground font-semibold text-center"
+                  >
+                    Give Now
+                  </Link>
+                </div>
               </nav>
             </motion.div>
           )}
@@ -154,7 +182,7 @@ export function Navbar() {
         <button
           type="button"
           onClick={() => setPrayerOpen(true)}
-          className="rounded-full bg-primary text-white px-4 py-3 shadow-lg hover:bg-primary-light transition-colors flex items-center gap-2 font-medium text-sm"
+          className="rounded-full bg-[var(--surface)] dark:bg-primary text-[var(--accent-purple)] dark:text-white px-4 py-3 shadow-[0_4px_24px_var(--shadow)] dark:shadow-lg hover:opacity-90 dark:hover:bg-primary-light transition-colors flex items-center gap-2 font-medium text-sm border border-[var(--border)] dark:border-transparent"
           aria-label="Pray with us"
         >
           🙏 Pray With Us

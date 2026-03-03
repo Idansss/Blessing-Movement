@@ -24,14 +24,14 @@ export default async function PortalDashboardPage() {
   const totalNaira = donations.reduce((s, d) => s + d.amount / 100, 0);
 
   return (
-    <div className="min-h-screen bg-muted/30">
-      <div className="max-w-3xl mx-auto px-4 py-12">
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
+    <div className="min-h-screen bg-muted/30 dark:bg-gradient-to-b dark:from-[#1A1208] dark:via-transparent dark:to-[#050302]">
+      <div className="max-w-3xl mx-auto px-4 pt-32 pb-12">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8 rounded-2xl bg-white/95 dark:bg-[#120D07]/90 border border-stone-200 dark:border-[var(--border)] p-5 shadow-sm">
           <div>
-            <h1 className="font-display text-2xl font-bold text-stone-900">
+            <h1 className="font-display text-2xl font-bold text-stone-900 dark:text-[var(--text-primary)]">
               Donor Portal
             </h1>
-            <p className="text-muted-foreground text-sm mt-1">
+            <p className="text-sm mt-1 text-stone-600 dark:text-[var(--text-secondary)]">
               {session.user.email}
             </p>
           </div>
@@ -101,7 +101,7 @@ export default async function PortalDashboardPage() {
         </div>
 
         <p className="mt-6 text-center text-sm">
-          <Link href="/" className="text-stone-700 hover:text-stone-900 font-medium">
+          <Link href="/" className="text-stone-700 hover:text-stone-900 dark:text-[var(--text-secondary)] dark:hover:text-[var(--text-primary)] font-medium">
             ← Back to site
           </Link>
         </p>
@@ -109,3 +109,4 @@ export default async function PortalDashboardPage() {
     </div>
   );
 }
+

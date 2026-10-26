@@ -9,10 +9,10 @@ import { DonationAmountSelector } from "@/components/ui/DonationAmountSelector";
 import { Heart, Shield, CheckCircle } from "lucide-react";
 
 const impactStatements = [
-  "₦5,000 feeds a family at our outreach",
-  "₦15,000 covers medical supplies for a day",
-  "₦50,000 provides welfare packs for 10 families",
-  "₦100,000 helps sponsor a full outreach",
+  "Support medical and welfare outreaches",
+  "Give towards practical care and essential supplies",
+  "Help bring people together in worship and prayer",
+  "Choose an amount that works for you",
 ];
 
 export function DonatePageClient() {
@@ -50,7 +50,8 @@ export function DonatePageClient() {
             Thank you for your gift
           </h1>
           <p className="mt-2 text-[var(--text-secondary)] dark:text-muted-foreground">
-            Your payment was successful. View your receipt and giving history in your donor portal.
+            Your payment was successful. View your receipt and giving history in
+            your donor portal.
           </p>
           <div className="mt-6 flex flex-col sm:flex-row gap-3 justify-center">
             <Link
@@ -89,7 +90,8 @@ export function DonatePageClient() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
           >
-            Your generosity fuels medical outreaches, Praise & Prophesy events, and the Blessings Movement.
+            Your generosity fuels medical outreaches, Praise & Prophesy events,
+            and the Blessings Movement.
           </motion.p>
         </div>
       </section>
@@ -103,11 +105,14 @@ export function DonatePageClient() {
             transition={{ delay: 0.2 }}
           >
             <h2 className="font-display text-2xl font-semibold text-[var(--text-primary)] mb-4">
-              Your gift makes an impact
+              Every gift is a helping hand
             </h2>
             <ul className="space-y-2">
               {impactStatements.map((s, i) => (
-                <li key={i} className="flex items-center gap-2 text-[var(--text-secondary)]">
+                <li
+                  key={i}
+                  className="flex items-center gap-2 text-[var(--text-secondary)]"
+                >
                   <Heart className="h-4 w-4 text-[var(--accent-gold)] dark:text-accent flex-shrink-0" />
                   {s}
                 </li>
@@ -153,7 +158,10 @@ export function DonatePageClient() {
 
             <div className="mt-8 space-y-4">
               <div>
-                <label htmlFor="donor-name" className="block text-sm font-medium text-[var(--text-primary)] mb-1">
+                <label
+                  htmlFor="donor-name"
+                  className="block text-sm font-medium text-[var(--text-primary)] mb-1"
+                >
                   Name (optional, for receipt)
                 </label>
                 <input
@@ -166,7 +174,10 @@ export function DonatePageClient() {
                 />
               </div>
               <div>
-                <label htmlFor="donor-email" className="block text-sm font-medium text-[var(--text-primary)] mb-1">
+                <label
+                  htmlFor="donor-email"
+                  className="block text-sm font-medium text-[var(--text-primary)] mb-1"
+                >
                   Email *
                 </label>
                 <input
@@ -181,15 +192,17 @@ export function DonatePageClient() {
               </div>
             </div>
 
-            {error && (
-              <p className="mt-4 text-sm text-red-600">{error}</p>
-            )}
+            {error && <p className="mt-4 text-sm text-red-600">{error}</p>}
 
             <div className="mt-6 p-4 rounded-xl bg-[var(--surface-muted)] dark:bg-[#1C1508] flex items-start gap-3">
               <Shield className="h-5 w-5 text-[var(--accent-gold)] dark:text-accent flex-shrink-0 mt-0.5" />
               <p className="text-sm text-[var(--text-secondary)]">
-                Secure payment via Paystack. Your details are protected. View receipts in your{" "}
-                <Link href="/portal" className="text-[var(--accent-purple)] dark:text-primary font-medium hover:underline">
+                Secure payment via Paystack. Your details are protected. View
+                receipts in your{" "}
+                <Link
+                  href="/portal"
+                  className="text-[var(--accent-purple)] dark:text-primary font-medium hover:underline"
+                >
                   donor portal
                 </Link>
                 .
@@ -214,14 +227,19 @@ export function DonatePageClient() {
                     }),
                   });
                   const data = await res.json();
-                  if (!res.ok) throw new Error(data.error || "Payment could not be started.");
+                  if (!res.ok)
+                    throw new Error(
+                      data.error || "Payment could not be started.",
+                    );
                   if (data.authorization_url) {
                     window.location.href = data.authorization_url;
                     return;
                   }
                   throw new Error("No payment URL received.");
                 } catch (e) {
-                  setError(e instanceof Error ? e.message : "Something went wrong.");
+                  setError(
+                    e instanceof Error ? e.message : "Something went wrong.",
+                  );
                 } finally {
                   setLoading(false);
                 }
@@ -232,7 +250,10 @@ export function DonatePageClient() {
             </button>
             <p className="mt-3 text-center text-sm text-[var(--text-secondary)]">
               Powered by Paystack. You can also{" "}
-              <Link href="/portal" className="text-[var(--accent-purple)] dark:text-primary hover:underline">
+              <Link
+                href="/portal"
+                className="text-[var(--accent-purple)] dark:text-primary hover:underline"
+              >
                 sign in
               </Link>{" "}
               to see your giving history.

@@ -1435,3 +1435,34 @@ main .shadow-xl {
     padding: 20px !important;
   }
 }
+
+/* Keep existing portal and giving controls consistent with the shared theme. */
+main
+  :is(
+    input:not([type="checkbox"]):not([type="radio"]):not([type="range"]),
+    textarea,
+    select
+  ) {
+  color: var(--text-primary);
+  background-color: var(--surface);
+  border-color: var(--border);
+}
+.dark main .text-primary,
+.dark main [class~="dark:text-primary"] {
+  color: var(--accent-purple);
+}
+.dark main [class~="dark:text-stone-700"] {
+  color: var(--text-primary);
+}
+main :is(.bg-stone-50, .bg-stone-100) {
+  background-color: var(--surface-muted);
+}
+.dark main section[class*="dark:from"],
+.dark main section[class*="dark:bg-[#0D0A07]"] {
+  background-image: none;
+  background-color: var(--background);
+}
+.dark main > div[class*="bg-gradient-to"] {
+  background-image: none;
+  background-color: var(--background);
+}

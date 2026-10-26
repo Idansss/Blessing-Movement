@@ -1,67 +1,88 @@
-"use client";
-
-import { motion } from "framer-motion";
-import { ProgramCard } from "@/components/ui/ProgramCard";
-import { missions } from "@/data/missions";
+import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
-
+import { ArrowUpRight } from "lucide-react";
+const programmes = [
+  {
+    title: "Medical & welfare outreach",
+    label: "Practical love",
+    description:
+      "Bringing care into the community through medical outreaches and essential supplies. Our volunteers give their time and skills to meet people where they are.",
+    src: "/images/outreach/medical-team.jpg",
+    alt: "A volunteer preparing medical supplies",
+    details: [
+      "Medical outreach",
+      "Welfare and essential supplies",
+      "Community visits",
+    ],
+  },
+  {
+    title: "Worship & prayer",
+    label: "Shared faith",
+    description:
+      "Gathering to worship, hear the Word and pray together. The Blessings makes room for shared faith and encouragement in Christ.",
+    src: "/images/outreach/ministry.jpg",
+    alt: "A minister speaking at The Blessings outreach",
+    details: ["Worship gatherings", "Prayer", "Ministry of the Word"],
+  },
+  {
+    title: "The Blessings Movement",
+    label: "Life together",
+    description:
+      "A community of people learning, sharing and serving together. There is a place to bring your skills, build friendships and join the next outreach.",
+    src: "/images/outreach/fellowship.jpg",
+    alt: "Members gathered for fellowship",
+    details: ["Fellowship", "Volunteering", "Community gatherings"],
+  },
+];
 export default function ProgramsPage() {
   return (
     <>
-      <section className="pt-28 pb-16 bg-gradient-to-b from-[var(--background-secondary)] to-[var(--background)] dark:from-[#1A1208] dark:via-transparent dark:to-[#050302]">
-        <div className="max-w-4xl mx-auto px-4">
-          <motion.h1
-            className="font-display text-4xl md:text-5xl font-bold text-[var(--text-primary)] dark:text-[#F5F0E8]"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-          >
-            Our Programs
-          </motion.h1>
-          <motion.p
-            className="mt-4 text-xl text-[var(--text-secondary)] dark:text-[#F5F0E8B3]"
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-          >
-            Three missions. One vision: spreading the love of Christ through physical blessings,
-            spiritual empowerment, and community.
-          </motion.p>
-        </div>
+      <section className="page-heading page-width">
+        <p className="eyebrow">What we do</p>
+        <h1>
+          Many hands.
+          <br />
+          <em>One heart to serve.</em>
+        </h1>
+        <p>
+          Medical care, welfare, worship and community. Different ways to put
+          love into action.
+        </p>
       </section>
-
-      <section className="py-12 bg-[var(--background)] dark:bg-[#0D0A07]">
-        <div className="max-w-4xl mx-auto px-4 space-y-6">
-          {missions.map((mission, i) => (
-            <ProgramCard
-              key={mission.id}
-              mission={mission}
-              index={i}
-              defaultExpanded={i === 0}
-            />
-          ))}
-        </div>
-      </section>
-
-      <section className="py-16 bg-[var(--background-secondary)] dark:bg-[#0D0A07]">
-        <div className="max-w-4xl mx-auto px-4 text-center">
-          <motion.p
-            className="text-[var(--text-secondary)] dark:text-[#F5F0E8B3] mb-6"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-          >
-            Want to volunteer, partner, or host an event?
-          </motion.p>
-          <Link
-            href="/get-involved"
-            className="inline-flex items-center gap-2 rounded-full bg-[var(--accent-gold)] dark:bg-primary px-6 py-3 font-semibold text-[var(--text-primary)] dark:text-white hover:opacity-90 dark:hover:bg-primary-light transition-colors"
-          >
-            Get Involved
-            <ArrowRight className="h-4 w-4" />
-          </Link>
-        </div>
+      <section className="page-width section-space space-y-24">
+        {programmes.map((p, i) => (
+          <article key={p.title} className="about-layout">
+            <div
+              className={
+                "relative h-[430px] overflow-hidden rounded " +
+                (i % 2 ? "md:order-2" : "")
+              }
+            >
+              <Image
+                src={p.src}
+                alt={p.alt}
+                fill
+                sizes="(max-width: 700px) 100vw, 50vw"
+                className="object-cover"
+              />
+            </div>
+            <div>
+              <p className="eyebrow">{p.label}</p>
+              <h2 className="section-title mt-4">{p.title}</h2>
+              <p>{p.description}</p>
+              <ul className="mt-6 space-y-3 text-sm text-[var(--text-secondary)]">
+                {p.details.map((d) => (
+                  <li key={d} className="border-b border-[var(--border)] pb-3">
+                    {d}
+                  </li>
+                ))}
+              </ul>
+              <Link href="/get-involved" className="text-link mt-7">
+                Take part <ArrowUpRight size={18} />
+              </Link>
+            </div>
+          </article>
+        ))}
       </section>
     </>
   );

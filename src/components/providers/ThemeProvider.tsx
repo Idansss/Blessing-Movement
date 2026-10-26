@@ -1,5 +1,6 @@
 "use client";
 
+import { MotionConfig } from "framer-motion";
 import { ThemeProvider as NextThemesProvider } from "next-themes";
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
@@ -11,7 +12,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
       storageKey="blessings-theme"
       disableTransitionOnChange={false}
     >
-      {children}
+      <MotionConfig reducedMotion="user">{children}</MotionConfig>
     </NextThemesProvider>
   );
 }

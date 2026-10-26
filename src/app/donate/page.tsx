@@ -5,18 +5,24 @@ import { DonorWall } from "./DonorWall";
 
 export const metadata: Metadata = {
   title: "Give",
-  description: "Support Blessings Global Outreach with a one-time or monthly gift.",
+  description:
+    "Support Blessings Global Outreach with a one-time or monthly gift.",
 };
 
-export default function DonatePage() {
+export default async function DonatePage() {
+  const donorWall = await DonorWall();
   return (
     <>
-      {/* Interactive donation form — client component */}
-      <Suspense fallback={<div className="min-h-screen bg-[var(--background-secondary)] dark:bg-muted/30" />}>
+      {/* Interactive donation form , client component */}
+      <Suspense
+        fallback={
+          <div className="min-h-screen bg-[var(--background-secondary)] dark:bg-muted/30" />
+        }
+      >
         <DonatePageClient />
       </Suspense>
 
-      {/* Donor wall — server component fetching from DB */}
+      {/* Donor wall , server component fetching from DB */}
       <section className="py-16 bg-[var(--background)] dark:bg-[#0D0A07]">
         <div className="max-w-4xl mx-auto px-4 text-center">
           <h2 className="font-display text-2xl font-semibold text-[var(--text-primary)]">
@@ -33,7 +39,7 @@ export default function DonatePage() {
               </p>
             }
           >
-            <DonorWall />
+            {donorWall}
           </Suspense>
         </div>
       </section>

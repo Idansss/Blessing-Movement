@@ -12,24 +12,39 @@ import { CookieConsent } from "@/components/ui/CookieConsent";
 export const dynamic = "force-dynamic";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
-const playfair = Playfair_Display({ subsets: ["latin"], variable: "--font-playfair" });
+const playfair = Playfair_Display({
+  subsets: ["latin"],
+  variable: "--font-playfair",
+});
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "https://blessingsglobal.org"),
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_SITE_URL ?? "https://blessing-movement.vercel.app",
+  ),
   title: {
     default: "Blessings Global Outreach | Spreading the Love of Christ",
     template: "%s | Blessings Global Outreach",
   },
   description:
-    "Blessings Global Outreach spreads the gospel and love of Jesus Christ through physical outreaches, spiritual empowerment (Praise & Prophesy), and community building (Blessings Movement).",
-  keywords: ["Christian outreach", "ministry", "Nigeria", "Praise and Prophesy", "Blessings Movement", "charity", "donation"],
+    "Sharing the love of Christ through medical and welfare outreach, worship, prayer and community.",
+  keywords: [
+    "Christian outreach",
+    "ministry",
+    "Nigeria",
+    "Praise and Prophesy",
+    "Blessings Movement",
+    "charity",
+    "donation",
+  ],
   authors: [{ name: "Blessings Global Outreach" }],
   openGraph: {
     type: "website",
     locale: "en_NG",
     siteName: "Blessings Global Outreach",
-    title: "Blessings Global Outreach — Spreading the Love of Christ. Blessing Nations.",
-    description: "Physical blessings, spiritual empowerment, and community. Join the movement.",
+    title:
+      "Blessings Global Outreach | Spreading the Love of Christ. Blessing Nations.",
+    description:
+      "Physical blessings, spiritual empowerment, and community. Join the movement.",
   },
   twitter: {
     card: "summary_large_image",
@@ -45,13 +60,22 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${inter.variable} ${playfair.variable}`} suppressHydrationWarning>
+    <html
+      lang="en"
+      className={`${inter.variable} ${playfair.variable}`}
+      suppressHydrationWarning
+    >
       <body className="min-h-screen flex flex-col font-sans theme-transition">
         <ThemeProvider>
           <SessionProvider>
             <AnnouncementBanner />
             <Navbar />
-            <main className="flex-1">{children}</main>
+            <a href="#main-content" className="skip-link">
+              Skip to content
+            </a>
+            <main id="main-content" className="flex-1">
+              {children}
+            </main>
             <Footer />
             <BackToTop />
             <CookieConsent />

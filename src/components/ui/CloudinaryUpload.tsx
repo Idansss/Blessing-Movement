@@ -20,7 +20,9 @@ export function CloudinaryUpload({
   return (
     <div>
       {label && (
-        <p className="block text-sm font-medium text-stone-700 mb-1">{label}</p>
+        <p className="block text-sm font-medium text-[var(--text-primary)] mb-1">
+          {label}
+        </p>
       )}
 
       {value ? (
@@ -35,7 +37,7 @@ export function CloudinaryUpload({
           <button
             type="button"
             onClick={() => onChange("")}
-            className="absolute top-2 right-2 p-1.5 rounded-full bg-black/60 text-white opacity-0 group-hover:opacity-100 transition-opacity"
+            className="absolute top-2 right-2 p-1.5 rounded-full bg-black/60 text-white opacity-100 transition-opacity"
             aria-label="Remove image"
           >
             <X className="h-4 w-4" />
@@ -66,11 +68,13 @@ export function CloudinaryUpload({
             <button
               type="button"
               onClick={() => open()}
-              className="w-full h-32 flex flex-col items-center justify-center gap-2 rounded-xl border-2 border-dashed border-stone-300 hover:border-primary hover:bg-primary/5 transition-colors text-stone-500 hover:text-primary"
+              className="w-full h-32 flex flex-col items-center justify-center gap-2 rounded-xl border-2 border-dashed border-stone-300 hover:border-primary hover:bg-primary/5 transition-colors text-[var(--text-secondary)] hover:text-primary"
             >
               <ImagePlus className="h-6 w-6" />
               <span className="text-sm font-medium">Click to upload image</span>
-              <span className="text-xs text-stone-400">JPG, PNG, WebP · max 5 MB</span>
+              <span className="text-xs text-stone-400">
+                JPG, PNG, WebP · max 5 MB
+              </span>
             </button>
           )}
         </CldUploadWidget>

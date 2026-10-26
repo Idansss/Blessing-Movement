@@ -24,19 +24,25 @@ export function CookieConsent() {
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: 40 }}
-          transition={{ duration: 0.3, delay: 1.5 }}
+          transition={{ duration: 0.2 }}
           className="fixed bottom-0 left-0 right-0 z-50 p-4 bg-stone-900 text-white"
         >
           <div className="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
             <p className="text-sm text-white/80">
-              We use cookies to improve your experience and analyse site traffic.{" "}
-              <Link href="/contact" className="underline text-white hover:text-accent">
+              We use essential cookies to keep member sign-in working.{" "}
+              <Link
+                href="/contact"
+                className="underline text-white hover:text-accent"
+              >
                 Learn more
               </Link>
             </p>
             <div className="flex gap-3 shrink-0">
               <button
-                onClick={() => setVisible(false)}
+                onClick={() => {
+                  localStorage.setItem("cookie-consent", "declined");
+                  setVisible(false);
+                }}
                 className="px-4 py-2 rounded-lg text-sm text-white/70 hover:text-white transition-colors"
               >
                 Decline

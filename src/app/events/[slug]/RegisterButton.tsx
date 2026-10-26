@@ -25,7 +25,7 @@ export function RegisterButton({
 
   const variantClasses =
     variant === "primary"
-      ? "bg-primary text-white hover:bg-primary-light"
+      ? "bg-[#e3bf79] text-[#28202c] hover:opacity-90"
       : "border-2 border-primary text-primary hover:bg-primary hover:text-white";
 
   const widthClass = fullWidth ? "w-full" : "";
@@ -38,7 +38,7 @@ export function RegisterButton({
         className={`${baseClasses} ${variantClasses} ${widthClass}`}
       >
         <CalendarCheck className="h-4 w-4" />
-        Register for this event
+        Register interest
       </button>
 
       <EventRegistrationModal

@@ -1,143 +1,52 @@
 "use client";
-
 import { useState } from "react";
-import { motion } from "framer-motion";
-import Image from "next/image";
 import { EventCard } from "@/components/ui/EventCard";
-import { EventRegistrationModal } from "@/components/ui/EventRegistrationModal";
 import { events, type EventType } from "@/data/events";
-
 const filters: { value: EventType | "all"; label: string }[] = [
-  { value: "all", label: "All" },
+  { value: "all", label: "All gatherings" },
   { value: "outreach", label: "Outreach" },
-  { value: "praise", label: "Praise Night" },
-  { value: "hangout", label: "Hangout" },
-  { value: "bootcamp", label: "Bootcamp" },
+  { value: "hangout", label: "Community" },
 ];
-
 export default function EventsPage() {
   const [filter, setFilter] = useState<EventType | "all">("all");
-  const [featuredModalOpen, setFeaturedModalOpen] = useState(false);
   const filtered =
     filter === "all" ? events : events.filter((e) => e.type === filter);
-  const featured = events.find((e) => e.featured) ?? events[0];
-
-  const hasFeaturedExternalUrl = featured?.registerUrl && featured.registerUrl !== "#";
-
   return (
     <>
-      <section className="pt-28 pb-16 bg-gradient-to-b from-[var(--background-secondary)] to-[var(--background)] dark:from-[#1A1208] dark:via-transparent dark:to-[#050302]">
-        <div className="max-w-4xl mx-auto px-4">
-          <motion.h1
-            className="font-display text-4xl md:text-5xl font-bold text-[var(--text-primary)] dark:text-[#F5F0E8]"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-          >
-            Events
-          </motion.h1>
-          <motion.p
-            className="mt-4 text-xl text-[var(--text-secondary)] dark:text-[#F5F0E8B3]"
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-          >
-            Join us in person or online. Outreaches, Praise & Prophesy, Hangouts, and Bootcamps.
-          </motion.p>
-        </div>
+      <section className="page-heading page-width">
+        <p className="eyebrow">Gather. Serve. Be a blessing.</p>
+        <h1>
+          Good things happen
+          <br />
+          <em>when we show up.</em>
+        </h1>
+        <p>
+          Find the next opportunity to serve, connect and share the love of
+          Christ. Register your interest for updates from the team.
+        </p>
       </section>
-
-      {featured && (
-        <section className="py-8 bg-[var(--background)] dark:bg-[#0D0A07]">
-          <div className="max-w-6xl mx-auto px-4">
-            <p className="text-sm font-medium text-accent mb-2">Featured</p>
-            <motion.div
-              className="relative rounded-2xl overflow-hidden border border-accent/40 shadow-[0_0_30px_rgba(0,0,0,0.8)]"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
+      <section className="page-width pb-24">
+        <div className="filter-bar" aria-label="Filter events">
+          {filters.map((f) => (
+            <button
+              key={f.value}
+              aria-pressed={f.value === filter}
+              onClick={() => setFilter(f.value)}
             >
-              <div className="relative h-64 md:h-80">
-                <Image
-                  src={featured.image}
-                  alt={featured.title}
-                  fill
-                  className="object-cover"
-                  priority
-                  sizes="(max-width: 768px) 100vw, 1024px"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
-                <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8 text-white">
-                  <span className="text-sm font-medium text-accent">Featured event</span>
-                  <h2 className="font-display text-2xl md:text-3xl font-bold mt-1">
-                    {featured.title}
-                  </h2>
-                  <p className="mt-2 text-white/90 max-w-2xl">
-                    {featured.description}
-                  </p>
-                  {hasFeaturedExternalUrl ? (
-                    <a
-                      href={featured.registerUrl!}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="mt-4 inline-flex items-center rounded-full bg-accent px-5 py-2.5 font-semibold text-accent-foreground hover:bg-accent-light transition-colors"
-                    >
-                      Register now
-                    </a>
-                  ) : (
-                    <button
-                      type="button"
-                      onClick={() => setFeaturedModalOpen(true)}
-                      className="mt-4 inline-flex items-center rounded-full bg-accent px-5 py-2.5 font-semibold text-accent-foreground hover:bg-accent-light transition-colors"
-                    >
-                      Register now
-                    </button>
-                  )}
-                </div>
-              </div>
-            </motion.div>
-          </div>
-        </section>
-      )}
-
-      <section className="py-12 bg-[var(--background-secondary)] dark:bg-[#0D0A07]">
-        <div className="max-w-6xl mx-auto px-4">
-          <div className="flex flex-wrap gap-2 mb-8">
-            {filters.map((f) => (
-              <button
-                key={f.value}
-                type="button"
-                onClick={() => setFilter(f.value)}
-                className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
-                  filter === f.value
-                    ? "bg-[var(--accent-gold)] dark:bg-accent text-white dark:text-accent-foreground shadow-[0_0_16px_rgba(184,134,11,0.4)] dark:shadow-[0_0_16px_rgba(212,175,55,0.5)]"
-                    : "bg-[var(--surface-muted)] dark:bg-[#1C1508] text-[var(--text-secondary)] dark:text-[#F5F0E8B3] hover:bg-[var(--border)]/50 dark:hover:bg-[#2A1C0C]"
-                }`}
-              >
-                {f.label}
-              </button>
-            ))}
-          </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {filtered.map((event, i) => (
-              <EventCard key={event.id} event={event} index={i} />
-            ))}
-          </div>
-          {filtered.length === 0 && (
-            <p className="text-center text-[var(--text-secondary)] dark:text-[#F5F0E8B3] py-12">
-              No events in this category yet. Check back soon.
-            </p>
-          )}
+              {f.label}
+            </button>
+          ))}
         </div>
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-7">
+          {filtered.map((event, i) => (
+            <EventCard key={event.id} event={event} index={i} />
+          ))}
+        </div>
+        <p className="mt-7 text-xs text-[var(--text-muted)]">
+          Photographs show past outreaches and gatherings. Unconfirmed dates,
+          times and venues will be announced by the team.
+        </p>
       </section>
-
-      {featured && (
-        <EventRegistrationModal
-          event={featured}
-          open={featuredModalOpen}
-          onClose={() => setFeaturedModalOpen(false)}
-        />
-      )}
     </>
   );
 }

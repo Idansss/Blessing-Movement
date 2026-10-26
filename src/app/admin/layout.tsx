@@ -24,7 +24,7 @@ export default async function AdminLayout({
   ];
 
   return (
-    <div className="min-h-screen flex">
+    <div className="admin-shell min-h-screen flex">
       <aside className="w-56 bg-primary text-white flex flex-col">
         <div className="p-4 font-display font-bold">Admin</div>
         <nav className="flex-1 px-2 space-y-1">
@@ -44,9 +44,9 @@ export default async function AdminLayout({
           </Link>
         </div>
       </aside>
-      <main className="flex-1 bg-muted/30 p-6 overflow-auto">
+      <div className="admin-content flex-1 bg-muted/30 p-6 overflow-auto">
         {children}
-      </main>
+      </div>
     </div>
   );
 }

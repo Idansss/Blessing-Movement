@@ -21,7 +21,15 @@ export function BackToTop() {
           animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0, scale: 0.8 }}
           transition={{ duration: 0.2 }}
-          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+          onClick={() =>
+            window.scrollTo({
+              top: 0,
+              behavior: window.matchMedia("(prefers-reduced-motion: reduce)")
+                .matches
+                ? "instant"
+                : "smooth",
+            })
+          }
           className="fixed bottom-24 right-6 z-40 p-3 rounded-full bg-white border border-stone-200 shadow-lg text-primary hover:bg-primary hover:text-white hover:border-primary transition-colors"
           aria-label="Back to top"
         >

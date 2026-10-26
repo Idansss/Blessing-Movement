@@ -1,40 +1,52 @@
 import { prisma } from "@/lib/db";
-
+import { MediaUploadForm } from "./MediaUploadForm";
+import Link from "next/link";
 export default async function AdminMediaPage() {
   const items = await prisma.mediaItem.findMany({
     orderBy: { createdAt: "desc" },
-    take: 50,
+    take: 100,
   });
   return (
     <div>
-      <h1 className="font-display text-2xl font-bold text-stone-900 mb-6">
-        Media hub
-      </h1>
-      <p className="text-muted-foreground text-sm mb-6">
-        Sermons, streams, podcasts, reels. Add new items via API or extend this page with a form.
-      </p>
-      <div className="bg-white rounded-xl border border-stone-200 overflow-hidden">
-        <table className="w-full text-sm">
-          <thead>
-            <tr className="bg-muted/50">
-              <th className="text-left p-3">Type</th>
-              <th className="text-left p-3">Title</th>
-              <th className="text-left p-3">Speaker / Topic</th>
-            </tr>
-          </thead>
-          <tbody>
-            {items.map((m) => (
-              <tr key={m.id} className="border-t border-stone-100">
-                <td className="p-3">{m.type}</td>
-                <td className="p-3 font-medium">{m.title}</td>
-                <td className="p-3">{m.speaker ?? m.topic ?? "—"}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+      <div className="flex flex-wrap justify-between gap-4 mb-8">
+        <div>
+          <p className="eyebrow">Team workspace</p>
+          <h1 className="font-display text-3xl mt-2">Media library</h1>
+        </div>
+        <Link className="text-link" href="/media">
+          View public gallery ↗
+        </Link>
       </div>
-      {items.length === 0 && (
-        <p className="text-muted-foreground text-sm mt-4">No media yet.</p>
+      <MediaUploadForm />
+      <h2 className="font-display text-2xl mt-10 mb-5">Uploaded media</h2>
+      {items.length === 0 ? (
+        <p className="text-sm">
+          No additional media uploaded yet. The supplied outreach album is
+          already on the public gallery.
+        </p>
+      ) : (
+        <div className="overflow-auto">
+          <table className="w-full text-sm">
+            <thead>
+              <tr className="border-b border-[var(--border)]">
+                <th className="p-3 text-left">Title</th>
+                <th className="p-3 text-left">Category</th>
+                <th className="p-3 text-left">Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              {items.map((item) => (
+                <tr key={item.id} className="border-b border-[var(--border)]">
+                  <td className="p-3">{item.title}</td>
+                  <td className="p-3">{item.topic ?? item.type}</td>
+                  <td className="p-3">
+                    {item.publishedAt ? "Published" : "Draft"}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       )}
     </div>
   );

@@ -4,10 +4,10 @@ import { useState } from "react";
 import { cn } from "@/lib/utils";
 
 const presets = [
-  { amount: 5000, label: "₦5,000", impact: "Feeds a family at outreach" },
-  { amount: 15000, label: "₦15,000", impact: "Medical supplies for a day" },
-  { amount: 50000, label: "₦50,000", impact: "Welfare packs for 10 families" },
-  { amount: 100000, label: "₦100,000", impact: "Sponsor a full outreach" },
+  { amount: 5000, label: "₦5,000", impact: "Support practical care" },
+  { amount: 15000, label: "₦15,000", impact: "Support the outreach" },
+  { amount: 50000, label: "₦50,000", impact: "Give towards the work" },
+  { amount: 100000, label: "₦100,000", impact: "Help the movement serve" },
 ];
 
 interface DonationAmountSelectorProps {
@@ -33,10 +33,8 @@ export function DonationAmountSelector({
   const handleCustomChange = (value: string) => {
     setCustomAmount(value);
     const num = parseInt(value.replace(/\D/g, ""), 10);
-    if (!isNaN(num)) {
-      setSelected(null);
-      onAmountChange?.(num);
-    }
+    setSelected(null);
+    onAmountChange?.(Number.isFinite(num) ? num : 0);
   };
 
   return (
@@ -46,12 +44,13 @@ export function DonationAmountSelector({
           <button
             key={p.amount}
             type="button"
+            aria-pressed={selected === p.amount}
             onClick={() => handleSelect(p.amount)}
             className={cn(
               "p-4 rounded-xl border-2 text-left transition-all",
               selected === p.amount
-                ? "border-[var(--accent-gold)] dark:border-accent bg-[var(--accent-gold)]/15 dark:bg-accent/15 text-[var(--text-primary)] dark:text-accent-foreground shadow-[0_0_18px_rgba(184,134,11,0.35)] dark:shadow-[0_0_18px_rgba(212,175,55,0.45)]"
-                : "border-[var(--border)] dark:border-[#F5F0E8]/40 hover:border-[var(--accent-gold)]/70 dark:hover:border-accent/70 bg-[var(--surface-muted)]/50 dark:bg-transparent text-[var(--text-secondary)] dark:text-[#F5F0E8CC]"
+                ? "border-[var(--accent-gold)] dark:border-accent bg-[var(--accent-gold)]/15 dark:bg-accent/15 text-[var(--text-primary)] dark:text-[var(--text-primary)] shadow-[0_0_18px_rgba(184,134,11,0.35)] dark:shadow-[0_0_18px_rgba(212,175,55,0.45)]"
+                : "border-[var(--border)] dark:border-[#F5F0E8]/40 hover:border-[var(--accent-gold)]/70 dark:hover:border-accent/70 bg-[var(--surface-muted)]/50 dark:bg-transparent text-[var(--text-secondary)] dark:text-[#F5F0E8CC]",
             )}
           >
             <span className="font-display text-xl font-bold">{p.label}</span>
@@ -60,7 +59,10 @@ export function DonationAmountSelector({
         ))}
       </div>
       <div>
-        <label htmlFor="custom-amount" className="block text-sm font-medium text-[var(--text-primary)] mb-1">
+        <label
+          htmlFor="custom-amount"
+          className="block text-sm font-medium text-[var(--text-primary)] mb-1"
+        >
           Or enter custom amount (₦)
         </label>
         <input

@@ -2,9 +2,14 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Media",
-  description: "Sermons, podcasts, streams from Blessings Global Outreach",
+  description:
+    "Photographs from Blessings Global Outreach: medical care, welfare, worship and community.",
 };
 
-export default function MediaLayout({ children }: { children: React.ReactNode }) {
+export default function MediaLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return <>{children}</>;
 }

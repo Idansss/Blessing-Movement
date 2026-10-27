@@ -1,4 +1,5 @@
 "use client";
+import { ThemedSelect } from "@/components/ui/ThemedSelect";
 import { useState, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { Upload, Loader2 } from "lucide-react";
@@ -72,12 +73,14 @@ export function MediaUploadForm() {
       </label>
       <label>
         Category
-        <select name="category">
-          <option>Community</option>
-          <option>Medical care</option>
-          <option>Welfare</option>
-          <option>Worship</option>
-        </select>
+        <ThemedSelect
+          name="category"
+          aria-label="Photo category"
+          defaultValue="Community"
+          options={["Community", "Medical care", "Welfare", "Worship"].map(
+            (value) => ({ value, label: value }),
+          )}
+        />
       </label>
       <label className="flex items-center gap-3">
         <input

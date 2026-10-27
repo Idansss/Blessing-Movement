@@ -25,14 +25,14 @@ export function CookieConsent() {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: 40 }}
           transition={{ duration: 0.2 }}
-          className="fixed bottom-0 left-0 right-0 z-50 p-4 bg-stone-900 text-white"
+          className="cookie-notice"
         >
           <div className="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
-            <p className="text-sm text-white/80">
+            <p className="text-sm text-[var(--text-secondary)]">
               We use essential cookies to keep member sign-in working.{" "}
               <Link
                 href="/contact"
-                className="underline text-white hover:text-accent"
+                className="underline text-[var(--accent-purple)] hover:underline"
               >
                 Learn more
               </Link>
@@ -43,7 +43,7 @@ export function CookieConsent() {
                   localStorage.setItem("cookie-consent", "declined");
                   setVisible(false);
                 }}
-                className="px-4 py-2 rounded-lg text-sm text-white/70 hover:text-white transition-colors"
+                className="px-4 py-2 rounded-lg text-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors"
               >
                 Decline
               </button>

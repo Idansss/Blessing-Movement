@@ -90,14 +90,14 @@ interface Stat {
 }
 
 // ---------------------------------------------------------------------------
-// CourseCard (server component — no interactivity needed)
+// CourseCard (server component , no interactivity needed)
 // ---------------------------------------------------------------------------
 
 function CourseCard({ course, index }: { course: CourseData; index: number }) {
   return (
     <div className="glass-dark overflow-hidden flex flex-col hover:shadow-[0_0_24px_rgba(212,175,55,0.35)] transition-shadow">
       {/* Thumbnail */}
-      <div className="relative h-48 bg-[#1C1508] overflow-hidden">
+      <div className="relative h-48 bg-[var(--surface-muted)] overflow-hidden">
         <Image
           src={course.image}
           alt={course.title}
@@ -115,15 +115,15 @@ function CourseCard({ course, index }: { course: CourseData; index: number }) {
 
       {/* Body */}
       <div className="p-5 flex flex-col flex-1">
-        <h3 className="font-display text-xl font-semibold text-[#F5F0E8] leading-snug">
+        <h3 className="font-display text-xl font-semibold text-[var(--text-primary)] leading-snug">
           {course.title}
         </h3>
-        <p className="mt-2 text-sm text-[#F5F0E8B3] leading-relaxed line-clamp-3">
+        <p className="mt-2 text-sm text-[var(--text-secondary)] leading-relaxed line-clamp-3">
           {course.description}
         </p>
 
         {/* Meta row */}
-        <div className="mt-4 flex items-center gap-4 text-xs text-[#F5F0E8B3]">
+        <div className="mt-4 flex items-center gap-4 text-xs text-[var(--text-secondary)]">
           <span className="inline-flex items-center gap-1">
             <BookOpen className="h-3.5 w-3.5" />
             {course.modules} modules
@@ -135,7 +135,7 @@ function CourseCard({ course, index }: { course: CourseData; index: number }) {
         </div>
 
         {/* CTA */}
-        <div className="mt-5 pt-4 border-t border-[#2A1C0C]">
+        <div className="mt-5 pt-4 border-t border-[var(--surface-muted)]">
           <Link
             href="/portal/register"
             className="inline-flex items-center gap-2 w-full justify-center px-4 py-2.5 rounded-xl bg-accent text-accent-foreground text-sm font-semibold hover:bg-accent-light transition-colors"
@@ -144,7 +144,7 @@ function CourseCard({ course, index }: { course: CourseData; index: number }) {
             Enroll (Free)
             <ArrowRight className="h-4 w-4" />
           </Link>
-          <p className="mt-2 text-center text-xs text-[#F5F0E8B3]">
+          <p className="mt-2 text-center text-xs text-[var(--text-secondary)]">
             A free account is required to enroll
           </p>
         </div>
@@ -210,12 +210,12 @@ export default async function LearnPage() {
       {/* ------------------------------------------------------------------ */}
       {/* Hero                                                                */}
       {/* ------------------------------------------------------------------ */}
-      <section className="pt-28 pb-16 bg-gradient-to-b from-[#1A1208] via-transparent to-[#050302]">
+      <section className="pt-28 pb-16 bg-gradient-to-b from-[var(--background-secondary)] via-transparent to-[var(--background)]">
         <div className="max-w-4xl mx-auto px-4">
-          <h1 className="font-display text-4xl md:text-5xl font-bold text-[#F5F0E8]">
+          <h1 className="font-display text-4xl md:text-5xl font-bold text-[var(--text-primary)]">
             Blessings Learning
           </h1>
-          <p className="mt-5 text-xl text-[#F5F0E8B3] max-w-2xl">
+          <p className="mt-5 text-xl text-[var(--text-secondary)] max-w-2xl">
             Faith-integrated courses for life, career, and purpose. Grow in
             knowledge and in God.
           </p>
@@ -225,20 +225,25 @@ export default async function LearnPage() {
       {/* ------------------------------------------------------------------ */}
       {/* Stats bar                                                           */}
       {/* ------------------------------------------------------------------ */}
-      <section className="py-10 bg-[#0D0A07] border-b border-[#1C1508]">
+      <section className="py-10 bg-[var(--background)] border-b border-[var(--surface-muted)]">
         <div className="max-w-4xl mx-auto px-4">
           <div className="grid grid-cols-3 gap-6 text-center">
             {stats.map((stat) => {
               const Icon = stat.icon;
               return (
-                <div key={stat.label} className="flex flex-col items-center gap-2">
+                <div
+                  key={stat.label}
+                  className="flex flex-col items-center gap-2"
+                >
                   <div className="inline-flex h-11 w-11 items-center justify-center rounded-full bg-accent/20">
                     <Icon className="h-5 w-5 text-accent-foreground" />
                   </div>
-                  <span className="font-display text-2xl font-bold text-[#F5F0E8]">
+                  <span className="font-display text-2xl font-bold text-[var(--text-primary)]">
                     {stat.value}
                   </span>
-                  <span className="text-xs text-[#F5F0E8B3]">{stat.label}</span>
+                  <span className="text-xs text-[var(--text-secondary)]">
+                    {stat.label}
+                  </span>
                 </div>
               );
             })}
@@ -249,13 +254,13 @@ export default async function LearnPage() {
       {/* ------------------------------------------------------------------ */}
       {/* Courses grid                                                        */}
       {/* ------------------------------------------------------------------ */}
-      <section className="py-16 bg-[#0D0A07]">
+      <section className="py-16 bg-[var(--background)]">
         <div className="max-w-6xl mx-auto px-4">
           <div className="mb-10">
-            <h2 className="font-display text-3xl font-bold text-[#F5F0E8]">
+            <h2 className="font-display text-3xl font-bold text-[var(--text-primary)]">
               Available Courses
             </h2>
-            <p className="mt-2 text-[#F5F0E8B3]">
+            <p className="mt-2 text-[var(--text-secondary)]">
               All courses are self-paced and completely free.
             </p>
           </div>
@@ -277,17 +282,18 @@ export default async function LearnPage() {
       {/* ------------------------------------------------------------------ */}
       {/* Coming soon banner                                                  */}
       {/* ------------------------------------------------------------------ */}
-      <section className="py-16 bg-gradient-to-b from-[#1A1208] via-[#0D0A07] to-black">
+      <section className="py-16 bg-gradient-to-b from-[var(--background-secondary)] via-[var(--background)] to-black">
         <div className="max-w-3xl mx-auto px-4 text-center">
           <div className="inline-flex h-14 w-14 items-center justify-center rounded-full bg-accent/20 mb-5">
             <Bell className="h-7 w-7 text-accent-foreground" />
           </div>
-          <h2 className="font-display text-2xl font-bold text-[#F5F0E8]">
+          <h2 className="font-display text-2xl font-bold text-[var(--text-primary)]">
             More courses launching in 2026
           </h2>
-          <p className="mt-3 text-[#F5F0E8B3] max-w-xl mx-auto">
-            We&apos;re working on new courses covering leadership, mental health,
-            discipleship, and more. Register to be notified when they go live.
+          <p className="mt-3 text-[var(--text-secondary)] max-w-xl mx-auto">
+            We&apos;re working on new courses covering leadership, mental
+            health, discipleship, and more. Register to be notified when they go
+            live.
           </p>
           <Link
             href="/portal/register"

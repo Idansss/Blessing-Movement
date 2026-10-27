@@ -4,7 +4,13 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import { Heart, Music, Users, ChevronDown, ChevronUp } from "lucide-react";
+import {
+  HandHelping as Heart,
+  Music,
+  Users,
+  ChevronDown,
+  ChevronUp,
+} from "lucide-react";
 import { cn } from "@/lib/utils";
 import { ScriptureQuote } from "./ScriptureQuote";
 import type { Mission } from "@/data/missions";
@@ -35,7 +41,7 @@ export function ProgramCard({
     <motion.div
       className={cn(
         "rounded-2xl overflow-hidden border border-stone-200 bg-white shadow-sm",
-        className
+        className,
       )}
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
@@ -85,10 +91,16 @@ export function ProgramCard({
                 />
               </div>
               <p className="text-stone-600">{mission.description}</p>
-              <ScriptureQuote verse={mission.scripture} reference={mission.reference} />
+              <ScriptureQuote
+                verse={mission.scripture}
+                reference={mission.reference}
+              />
               <ul className="space-y-2">
                 {mission.highlights.map((h, i) => (
-                  <li key={i} className="flex items-center gap-2 text-stone-600">
+                  <li
+                    key={i}
+                    className="flex items-center gap-2 text-stone-600"
+                  >
                     <span className="h-1.5 w-1.5 rounded-full bg-accent" />
                     {h}
                   </li>

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import {
-  Heart,
+  MessagesSquare,
   Star,
   BookOpen,
   ArrowRight,
@@ -21,10 +21,7 @@ export const metadata: Metadata = {
 
 type PrayerStatus = "new" | "praying" | "followed_up" | "testimony";
 
-const statusConfig: Record<
-  PrayerStatus,
-  { label: string; classes: string }
-> = {
+const statusConfig: Record<PrayerStatus, { label: string; classes: string }> = {
   new: {
     label: "New",
     classes: "bg-purple-100 text-purple-800",
@@ -113,7 +110,7 @@ function PrayerCard({ prayer }: PrayerCardProps) {
       )}
 
       {/* Prayer content */}
-      <p className="text-[#F5F0E8CC] leading-relaxed text-sm">
+      <p className="text-[var(--text-secondary)] leading-relaxed text-sm">
         &ldquo;{displayContent}&rdquo;
       </p>
 
@@ -128,13 +125,13 @@ function PrayerCard({ prayer }: PrayerCardProps) {
           </span>
           {/* Name */}
           {firstName && (
-            <span className="text-xs text-[#F5F0E8B3] font-medium">
-              — {firstName}
+            <span className="text-xs text-[var(--text-secondary)] font-medium">
+              , {firstName}
             </span>
           )}
         </div>
         {/* Date */}
-        <span className="text-xs text-[#F5F0E8B3]">
+        <span className="text-xs text-[var(--text-secondary)]">
           {formatRelativeDate(prayer.createdAt)}
         </span>
       </div>
@@ -168,7 +165,7 @@ export default async function PrayerWallPage() {
         <div className="relative z-10 max-w-3xl mx-auto px-4">
           {/* Icon */}
           <div className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 mb-6">
-            <Heart className="h-7 w-7 text-accent fill-accent/30" />
+            <MessagesSquare className="h-7 w-7 text-accent" />
           </div>
 
           <h1 className="font-display text-4xl md:text-5xl font-bold mb-4">
@@ -186,7 +183,7 @@ export default async function PrayerWallPage() {
               &ldquo;The prayer of a righteous person is powerful and
               effective.&rdquo;{" "}
               <span className="not-italic font-semibold text-accent">
-                — James 5:16
+                , James 5:16
               </span>
             </p>
           </div>
@@ -194,14 +191,14 @@ export default async function PrayerWallPage() {
       </section>
 
       {/* ── Submit CTA ────────────────────────────────────────────────────── */}
-      <section className="py-8 bg-[#0D0A07] border-b border-[#1C1508]">
+      <section className="py-8 bg-[var(--background)] border-b border-[var(--surface-muted)]">
         <div className="max-w-4xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
           <div>
-            <p className="font-display text-lg font-bold text-[#F5F0E8]">
+            <p className="font-display text-lg font-bold text-[var(--text-primary)]">
               Have a prayer request?
             </p>
-            <p className="text-sm text-[#F5F0E8B3] mt-0.5">
-              Submit anonymously or with your name — we pray for every request.
+            <p className="text-sm text-[var(--text-secondary)] mt-0.5">
+              Submit anonymously or with your name , we pray for every request.
             </p>
           </div>
           <div className="flex flex-col sm:flex-row items-center gap-3">
@@ -217,16 +214,15 @@ export default async function PrayerWallPage() {
       </section>
 
       {/* ── Prayer wall grid ──────────────────────────────────────────────── */}
-      <section className="py-12 bg-[#0D0A07] min-h-screen">
+      <section className="py-12 bg-[var(--background)] min-h-screen">
         <div className="max-w-4xl mx-auto px-4">
-
           {/* Count heading */}
           {prayers.length > 0 && (
             <div className="flex items-center justify-between mb-6">
-              <h2 className="font-display text-xl font-bold text-[#F5F0E8]">
+              <h2 className="font-display text-xl font-bold text-[var(--text-primary)]">
                 Community prayers
               </h2>
-              <span className="text-sm text-[#F5F0E8B3] font-medium">
+              <span className="text-sm text-[var(--text-secondary)] font-medium">
                 {prayers.length} public request{prayers.length !== 1 ? "s" : ""}
               </span>
             </div>
@@ -238,10 +234,10 @@ export default async function PrayerWallPage() {
               <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary/10 mb-5">
                 <Inbox className="h-8 w-8 text-primary" />
               </div>
-              <h3 className="font-display text-xl font-bold text-[#F5F0E8] mb-2">
+              <h3 className="font-display text-xl font-bold text-[var(--text-primary)] mb-2">
                 Be the first to pray
               </h3>
-              <p className="text-[#F5F0E8B3] max-w-sm mx-auto mb-6">
+              <p className="text-[var(--text-secondary)] max-w-sm mx-auto mb-6">
                 No public prayer requests yet. Submit yours and let the
                 community stand with you in faith.
               </p>
@@ -268,11 +264,11 @@ export default async function PrayerWallPage() {
           {prayers.length > 0 && (
             <div className="mt-12 text-center">
               <div className="glass-dark p-8 max-w-md mx-auto">
-                <Heart className="h-8 w-8 text-accent mx-auto mb-3" />
-                <h3 className="font-display text-lg font-bold text-[#F5F0E8] mb-2">
+                <MessagesSquare className="h-8 w-8 text-accent mx-auto mb-3" />
+                <h3 className="font-display text-lg font-bold text-[var(--text-primary)] mb-2">
                   Add your prayer request
                 </h3>
-                <p className="text-sm text-[#F5F0E8B3] mb-5">
+                <p className="text-sm text-[var(--text-secondary)] mb-5">
                   Let our community agree with you in faith. We pray for every
                   request submitted.
                 </p>

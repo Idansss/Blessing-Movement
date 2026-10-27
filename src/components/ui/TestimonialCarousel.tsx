@@ -12,20 +12,23 @@ interface TestimonialCarouselProps {
   className?: string;
 }
 
-export function TestimonialCarousel({ items, className }: TestimonialCarouselProps) {
+export function TestimonialCarousel({
+  items,
+  className,
+}: TestimonialCarouselProps) {
   const [index, setIndex] = useState(0);
   const next = useCallback(
     () => setIndex((i) => (i + 1) % items.length),
-    [items.length]
+    [items.length],
   );
   const prev = useCallback(
     () => setIndex((i) => (i - 1 + items.length) % items.length),
-    [items.length]
+    [items.length],
   );
 
   return (
     <div className={cn("relative", className)}>
-      <div className="overflow-hidden rounded-2xl section-card border border-[var(--border)] dark:border-[#2A1C0C] p-6 md:p-8">
+      <div className="overflow-hidden rounded-2xl section-card border border-[var(--border)] dark:border-[var(--surface-muted)] p-6 md:p-8">
         <AnimatePresence mode="wait">
           <motion.div
             key={index}
@@ -52,7 +55,9 @@ export function TestimonialCarousel({ items, className }: TestimonialCarouselPro
               <p className="mt-4 font-semibold text-[var(--accent-gold)] dark:text-accent text-sm md:text-base">
                 {items[index].name}
               </p>
-              <p className="text-xs md:text-sm text-[var(--text-secondary)]">{items[index].role}</p>
+              <p className="text-xs md:text-sm text-[var(--text-secondary)]">
+                {items[index].role}
+              </p>
             </div>
           </motion.div>
         </AnimatePresence>
@@ -61,7 +66,7 @@ export function TestimonialCarousel({ items, className }: TestimonialCarouselPro
         <button
           type="button"
           onClick={prev}
-          className="p-2 rounded-full border border-[var(--border)] dark:border-[#3B2A14] bg-[var(--surface-muted)] dark:bg-[#1C1508] text-[var(--text-primary)] dark:text-[#F5F0E8] hover:border-[var(--accent-gold)]/60 dark:hover:border-accent/60 transition-colors"
+          className="p-2 rounded-full border border-[var(--border)] dark:border-[#3B2A14] bg-[var(--surface-muted)] dark:bg-[var(--surface-muted)] text-[var(--text-primary)] dark:text-[var(--text-primary)] hover:border-[var(--accent-gold)]/60 dark:hover:border-accent/60 transition-colors"
           aria-label="Previous testimony"
         >
           <ChevronLeft className="h-5 w-5" />
@@ -74,7 +79,9 @@ export function TestimonialCarousel({ items, className }: TestimonialCarouselPro
               onClick={() => setIndex(i)}
               className={cn(
                 "h-2 rounded-full transition-all",
-                i === index ? "w-6 bg-[var(--accent-gold)] dark:bg-accent" : "w-2 bg-[var(--border)] dark:bg-[#4B3A20]"
+                i === index
+                  ? "w-6 bg-[var(--accent-gold)] dark:bg-accent"
+                  : "w-2 bg-[var(--border)] dark:bg-[#4B3A20]",
               )}
               aria-label={`Go to testimony ${i + 1}`}
             />
@@ -83,7 +90,7 @@ export function TestimonialCarousel({ items, className }: TestimonialCarouselPro
         <button
           type="button"
           onClick={next}
-          className="p-2 rounded-full border border-[var(--border)] dark:border-[#3B2A14] bg-[var(--surface-muted)] dark:bg-[#1C1508] text-[var(--text-primary)] dark:text-[#F5F0E8] hover:border-[var(--accent-gold)]/60 dark:hover:border-accent/60 transition-colors"
+          className="p-2 rounded-full border border-[var(--border)] dark:border-[#3B2A14] bg-[var(--surface-muted)] dark:bg-[var(--surface-muted)] text-[var(--text-primary)] dark:text-[var(--text-primary)] hover:border-[var(--accent-gold)]/60 dark:hover:border-accent/60 transition-colors"
           aria-label="Next testimony"
         >
           <ChevronRight className="h-5 w-5" />

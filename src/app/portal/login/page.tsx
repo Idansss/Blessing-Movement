@@ -40,7 +40,7 @@ export default function PortalLoginPage() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-[#1A1208] via-[#0D0A07] to-black px-4">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-[var(--background-secondary)] via-[var(--background)] to-black px-4">
       <motion.div
         className="w-full max-w-md bg-white rounded-2xl shadow-lg border border-stone-200 p-8"
         initial={{ opacity: 0, y: 20 }}
@@ -55,7 +55,10 @@ export default function PortalLoginPage() {
         </p>
         <form onSubmit={handleSubmit} className="mt-8 space-y-4">
           <div>
-            <label htmlFor="email" className="block text-sm font-medium text-stone-700 mb-1">
+            <label
+              htmlFor="email"
+              className="block text-sm font-medium text-stone-700 mb-1"
+            >
               Email
             </label>
             <input
@@ -64,12 +67,15 @@ export default function PortalLoginPage() {
               required
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full px-4 py-2.5 rounded-xl border border-primary/50 bg-[#FDFBF7] text-stone-900 placeholder:text-stone-400 focus:border-primary focus:ring-2 focus:ring-primary/25 outline-none"
+              className="w-full px-4 py-2.5 rounded-xl border border-primary/50 bg-[var(--surface)] text-stone-900 placeholder:text-stone-400 focus:border-primary focus:ring-2 focus:ring-primary/25 outline-none"
               placeholder="you@example.com"
             />
           </div>
           <div>
-            <label htmlFor="password" className="block text-sm font-medium text-stone-700 mb-1">
+            <label
+              htmlFor="password"
+              className="block text-sm font-medium text-stone-700 mb-1"
+            >
               Password
             </label>
             <input
@@ -78,13 +84,11 @@ export default function PortalLoginPage() {
               required
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full px-4 py-2.5 rounded-xl border border-primary/50 bg-[#FDFBF7] text-stone-900 placeholder:text-stone-400 focus:border-primary focus:ring-2 focus:ring-primary/25 outline-none"
+              className="w-full px-4 py-2.5 rounded-xl border border-primary/50 bg-[var(--surface)] text-stone-900 placeholder:text-stone-400 focus:border-primary focus:ring-2 focus:ring-primary/25 outline-none"
               placeholder="••••••••"
             />
           </div>
-          {error && (
-            <p className="text-sm text-red-600">{error}</p>
-          )}
+          {error && <p className="text-sm text-red-600">{error}</p>}
           <button
             type="submit"
             disabled={loading}
@@ -95,12 +99,18 @@ export default function PortalLoginPage() {
         </form>
         <p className="mt-6 text-center text-sm text-muted-foreground">
           Don&apos;t have an account?{" "}
-          <Link href="/portal/register" className="text-primary font-medium hover:underline">
+          <Link
+            href="/portal/register"
+            className="text-primary font-medium hover:underline"
+          >
             Create one
           </Link>
         </p>
         <p className="mt-2 text-center text-sm">
-          <Link href="/" className="text-stone-600 hover:text-stone-900 font-medium">
+          <Link
+            href="/"
+            className="text-stone-600 hover:text-stone-900 font-medium"
+          >
             ← Back to site
           </Link>
         </p>

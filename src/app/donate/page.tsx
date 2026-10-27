@@ -23,7 +23,7 @@ export default async function DonatePage() {
       </Suspense>
 
       {/* Donor wall , server component fetching from DB */}
-      <section className="py-16 bg-[var(--background)] dark:bg-[#0D0A07]">
+      <section className="py-16 bg-[var(--background)] dark:bg-[var(--background)]">
         <div className="max-w-4xl mx-auto px-4 text-center">
           <h2 className="font-display text-2xl font-semibold text-[var(--text-primary)]">
             With Gratitude
@@ -34,7 +34,7 @@ export default async function DonatePage() {
 
           <Suspense
             fallback={
-              <p className="mt-6 text-[var(--text-muted)] dark:text-[#F5F0E8B3] text-sm animate-pulse">
+              <p className="mt-6 text-[var(--text-muted)] dark:text-[var(--text-secondary)] text-sm animate-pulse">
                 Loading donor wall…
               </p>
             }

@@ -25,7 +25,7 @@ export function RegisterButton({
 
   const variantClasses =
     variant === "primary"
-      ? "bg-[#e3bf79] text-[#28202c] hover:opacity-90"
+      ? "bg-[var(--action-bg)] text-[var(--action-text)] hover:opacity-90"
       : "border-2 border-primary text-primary hover:bg-primary hover:text-white";
 
   const widthClass = fullWidth ? "w-full" : "";

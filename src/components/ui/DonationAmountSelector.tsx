@@ -50,7 +50,7 @@ export function DonationAmountSelector({
               "p-4 rounded-xl border-2 text-left transition-all",
               selected === p.amount
                 ? "border-[var(--accent-gold)] dark:border-accent bg-[var(--accent-gold)]/15 dark:bg-accent/15 text-[var(--text-primary)] dark:text-[var(--text-primary)] shadow-[0_0_18px_rgba(184,134,11,0.35)] dark:shadow-[0_0_18px_rgba(212,175,55,0.45)]"
-                : "border-[var(--border)] dark:border-[#F5F0E8]/40 hover:border-[var(--accent-gold)]/70 dark:hover:border-accent/70 bg-[var(--surface-muted)]/50 dark:bg-transparent text-[var(--text-secondary)] dark:text-[#F5F0E8CC]",
+                : "border-[var(--border)] dark:border-[var(--text-primary)]/40 hover:border-[var(--accent-gold)]/70 dark:hover:border-accent/70 bg-[var(--surface-muted)]/50 dark:bg-transparent text-[var(--text-secondary)] dark:text-[var(--text-secondary)]",
             )}
           >
             <span className="font-display text-xl font-bold">{p.label}</span>

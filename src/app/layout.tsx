@@ -1,18 +1,17 @@
 import type { Metadata } from "next";
-import { Inter, Playfair_Display } from "next/font/google";
+import { Manrope, Sora } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
-import { AnnouncementBanner } from "@/components/layout/AnnouncementBanner";
 import { SessionProvider } from "@/components/providers/SessionProvider";
 import { BackToTop } from "@/components/ui/BackToTop";
 import { CookieConsent } from "@/components/ui/CookieConsent";
 
 export const dynamic = "force-dynamic";
 
-const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
-const playfair = Playfair_Display({
+const inter = Manrope({ subsets: ["latin"], variable: "--font-inter" });
+const playfair = Sora({
   subsets: ["latin"],
   variable: "--font-playfair",
 });
@@ -65,10 +64,12 @@ export default function RootLayout({
       className={`${inter.variable} ${playfair.variable}`}
       suppressHydrationWarning
     >
-      <body className="min-h-screen flex flex-col font-sans theme-transition">
+      <body className="min-h-screen flex flex-col font-sans">
+        <noscript>
+          <style>{`.blur-word,.reveal{opacity:1!important;filter:none!important;transform:none!important;}`}</style>
+        </noscript>
         <ThemeProvider>
           <SessionProvider>
-            <AnnouncementBanner />
             <Navbar />
             <a href="#main-content" className="skip-link">
               Skip to content

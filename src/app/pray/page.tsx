@@ -214,7 +214,13 @@ export default async function PrayerWallPage() {
       </section>
 
       {/* ── Prayer wall grid ──────────────────────────────────────────────── */}
-      <section className="py-12 bg-[var(--background)] min-h-screen">
+      <section
+        className={
+          prayers.length === 0
+            ? "py-8 bg-[var(--background)]"
+            : "py-12 bg-[var(--background)]"
+        }
+      >
         <div className="max-w-4xl mx-auto px-4">
           {/* Count heading */}
           {prayers.length > 0 && (
@@ -230,7 +236,7 @@ export default async function PrayerWallPage() {
 
           {/* Empty state */}
           {prayers.length === 0 && (
-            <div className="text-center py-20">
+            <div className="text-center py-10">
               <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary/10 mb-5">
                 <Inbox className="h-8 w-8 text-primary" />
               </div>

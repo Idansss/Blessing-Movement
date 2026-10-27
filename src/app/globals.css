@@ -94,7 +94,7 @@
     opacity: 0.55;
   }
   :focus-visible {
-    outline: 2px solid var(--accent-gold);
+    outline: 2px solid currentColor;
     outline-offset: 4px;
   }
   :focus:not(:focus-visible) {
@@ -109,6 +109,20 @@
     scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
     -webkit-tap-highlight-color: transparent;
   }
+}
+
+/*
+ * Keep keyboard focus visible without the browser-blue halo. Text controls use
+ * a quiet inset marker so focus never draws a coloured line around the field.
+ */
+input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not(
+    [type="file"]
+  ):focus,
+textarea:focus,
+select:focus {
+  outline: none !important;
+  border-color: var(--border) !important;
+  box-shadow: inset 3px 0 0 var(--text-muted) !important;
 }
 *::-webkit-scrollbar {
   width: 10px;
@@ -320,7 +334,7 @@ svg {
   color: var(--text-primary);
 }
 .theme-toggle:focus-visible {
-  outline: 2px solid var(--accent-purple);
+  outline: 2px solid currentColor;
   outline-offset: 3px;
 }
 .theme-toggle:focus:not(:focus-visible) {

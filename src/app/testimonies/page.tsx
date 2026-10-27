@@ -6,11 +6,12 @@ import {
   CheckCircle,
   Loader2,
   BookOpen,
-  Heart,
+  HeartPulse,
   Users,
   Star,
   ChevronRight,
 } from "lucide-react";
+import { ThemedSelect } from "@/components/ui/ThemedSelect";
 import { testimonies } from "@/data/testimonies";
 
 // ─── Metadata is exported separately; client components export it as a const ─
@@ -41,7 +42,7 @@ type TestimonyType = (typeof TESTIMONY_TYPES)[number];
 
 const WHY_SHARE = [
   {
-    icon: Heart,
+    icon: HeartPulse,
     title: "Inspires others",
     body: "Your story gives hope to someone walking the same road you once walked.",
   },
@@ -71,7 +72,7 @@ function TestimonyMiniCard({
 
   return (
     <div className="bg-muted/60 rounded-xl border border-stone-200 p-4">
-      <p className="text-sm text-[#F5F0E8CC] italic leading-relaxed">
+      <p className="text-sm text-[var(--text-secondary)] italic leading-relaxed">
         &ldquo;{truncated}&rdquo;
       </p>
       <div className="mt-3 flex items-center gap-2">
@@ -81,8 +82,12 @@ function TestimonyMiniCard({
           </span>
         </div>
         <div>
-          <p className="text-xs font-semibold text-[#F5F0E8]">{testimony.name}</p>
-          <p className="text-xs text-[#F5F0E8B3]">{testimony.role}</p>
+          <p className="text-xs font-semibold text-[var(--text-primary)]">
+            {testimony.name}
+          </p>
+          <p className="text-xs text-[var(--text-secondary)]">
+            {testimony.role}
+          </p>
         </div>
       </div>
     </div>
@@ -132,7 +137,7 @@ export default function TestimoniesPage() {
       setErrorMsg(
         err instanceof Error
           ? err.message
-          : "Something went wrong. Please try again."
+          : "Something went wrong. Please try again.",
       );
       setStatus("error");
     }
@@ -153,7 +158,7 @@ export default function TestimoniesPage() {
   return (
     <>
       {/* ── Header ────────────────────────────────────────────────────────── */}
-      <section className="pt-28 pb-12 bg-gradient-to-b from-[#1A1208] via-transparent to-[#050302]">
+      <section className="pt-28 pb-12 bg-gradient-to-b from-[var(--background-secondary)] via-transparent to-[var(--background)]">
         <div className="max-w-5xl mx-auto px-4 text-center">
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
@@ -165,7 +170,7 @@ export default function TestimoniesPage() {
           </motion.div>
 
           <motion.h1
-            className="font-display text-4xl md:text-5xl font-bold text-[#F5F0E8]"
+            className="font-display text-4xl md:text-5xl font-bold text-[var(--text-primary)]"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
@@ -174,7 +179,7 @@ export default function TestimoniesPage() {
           </motion.h1>
 
           <motion.p
-            className="mt-4 text-xl text-[#F5F0E8B3] max-w-xl mx-auto"
+            className="mt-4 text-xl text-[var(--text-secondary)] max-w-xl mx-auto"
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
@@ -186,9 +191,8 @@ export default function TestimoniesPage() {
       </section>
 
       {/* ── Two-column content ────────────────────────────────────────────── */}
-      <section className="py-12 bg-[#0D0A07]">
+      <section className="py-12 bg-[var(--background)]">
         <div className="max-w-5xl mx-auto px-4 grid md:grid-cols-2 gap-12">
-
           {/* ── Left: Form ────────────────────────────────────────────────── */}
           <motion.div {...fadeUp}>
             {status === "success" ? (
@@ -221,12 +225,15 @@ export default function TestimoniesPage() {
               </div>
             ) : (
               /* ── Form ───────────────────────────────────────────────────── */
-              <form onSubmit={handleSubmit} className="space-y-5 glass-dark p-6 rounded-2xl">
+              <form
+                onSubmit={handleSubmit}
+                className="space-y-5 glass-dark p-6 rounded-2xl"
+              >
                 <div>
-                  <h2 className="font-display text-2xl font-bold text-[#F5F0E8] mb-1">
+                  <h2 className="font-display text-2xl font-bold text-[var(--text-primary)] mb-1">
                     Your story
                   </h2>
-                  <p className="text-sm text-[#F5F0E8B3]">
+                  <p className="text-sm text-[var(--text-secondary)]">
                     Fields marked * are required.
                   </p>
                 </div>
@@ -235,7 +242,7 @@ export default function TestimoniesPage() {
                 <div>
                   <label
                     htmlFor="testimony-name"
-                    className="block text-sm font-medium text-[#F5F0E8] mb-1"
+                    className="block text-sm font-medium text-[var(--text-primary)] mb-1"
                   >
                     Name *
                   </label>
@@ -254,7 +261,7 @@ export default function TestimoniesPage() {
                 <div>
                   <label
                     htmlFor="testimony-email"
-                    className="block text-sm font-medium text-[#F5F0E8] mb-1"
+                    className="block text-sm font-medium text-[var(--text-primary)] mb-1"
                   >
                     Email *
                   </label>
@@ -273,26 +280,22 @@ export default function TestimoniesPage() {
                 <div>
                   <label
                     htmlFor="testimony-type"
-                    className="block text-sm font-medium text-[#F5F0E8] mb-1"
+                    className="block text-sm font-medium text-[var(--text-primary)] mb-1"
                   >
                     Type of testimony *
                   </label>
                   <div className="relative">
-                    <select
+                    <ThemedSelect
                       id="testimony-type"
                       value={testimonyType}
-                      onChange={(e) =>
-                        setTestimonyType(e.target.value as TestimonyType)
+                      onValueChange={(value) =>
+                        setTestimonyType(value as TestimonyType)
                       }
-                      className="w-full appearance-none px-4 py-2.5 rounded-xl border border-stone-200 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none text-sm bg-white transition-colors pr-10"
-                    >
-                      {TESTIMONY_TYPES.map((t) => (
-                        <option key={t} value={t}>
-                          {t}
-                        </option>
-                      ))}
-                    </select>
-                    <ChevronRight className="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-stone-400 rotate-90 pointer-events-none" />
+                      options={TESTIMONY_TYPES.map((type) => ({
+                        value: type,
+                        label: type,
+                      }))}
+                    />
                   </div>
                 </div>
 
@@ -313,7 +316,7 @@ export default function TestimoniesPage() {
                     placeholder="Tell us what God did…"
                     className="w-full px-4 py-3 rounded-xl border border-stone-200 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none text-sm resize-y transition-colors leading-relaxed"
                   />
-                  <p className="text-xs text-[#F5F0E8B3] mt-1">
+                  <p className="text-xs text-[var(--text-secondary)] mt-1">
                     Be as detailed as you like. The more specific, the more it
                     encourages others.
                   </p>
@@ -330,9 +333,9 @@ export default function TestimoniesPage() {
                   />
                   <label
                     htmlFor="testimony-public"
-                    className="text-sm text-[#F5F0E8B3] cursor-pointer leading-snug"
+                    className="text-sm text-[var(--text-secondary)] cursor-pointer leading-snug"
                   >
-                    <span className="font-medium text-[#F5F0E8]">
+                    <span className="font-medium text-[var(--text-primary)]">
                       Can we share this publicly?
                     </span>{" "}
                     Your testimony may appear on our Prayer Wall or website to
@@ -370,7 +373,7 @@ export default function TestimoniesPage() {
                   )}
                 </button>
 
-                <p className="text-xs text-center text-[#F5F0E8B3]">
+                <p className="text-xs text-center text-[var(--text-secondary)]">
                   All submissions are reviewed before publication.
                 </p>
               </form>
@@ -379,7 +382,6 @@ export default function TestimoniesPage() {
 
           {/* ── Right: Info section ───────────────────────────────────────── */}
           <div className="space-y-8">
-
             {/* Scripture */}
             <motion.div
               {...fadeUp}
@@ -388,20 +390,17 @@ export default function TestimoniesPage() {
             >
               <BookOpen className="h-6 w-6 text-accent mb-3" />
               <blockquote className="font-display text-lg font-semibold leading-snug italic">
-                &ldquo;They overcame by the blood of the Lamb and by the word
-                of their testimony.&rdquo;
+                &ldquo;They overcame by the blood of the Lamb and by the word of
+                their testimony.&rdquo;
               </blockquote>
               <p className="mt-3 text-sm font-semibold text-accent">
-                — Revelation 12:11
+                , Revelation 12:11
               </p>
             </motion.div>
 
             {/* Why share */}
-            <motion.div
-              {...fadeUp}
-              transition={{ duration: 0.5, delay: 0.2 }}
-            >
-              <h3 className="font-display text-xl font-bold text-[#F5F0E8] mb-4">
+            <motion.div {...fadeUp} transition={{ duration: 0.5, delay: 0.2 }}>
+              <h3 className="font-display text-xl font-bold text-[var(--text-primary)] mb-4">
                 Why share your story?
               </h3>
               <ul className="space-y-4">
@@ -411,10 +410,12 @@ export default function TestimoniesPage() {
                       <Icon className="h-4 w-4 text-primary" />
                     </div>
                     <div>
-                      <p className="text-sm font-semibold text-[#F5F0E8]">
+                      <p className="text-sm font-semibold text-[var(--text-primary)]">
                         {title}
                       </p>
-                      <p className="text-sm text-[#F5F0E8B3] mt-0.5">{body}</p>
+                      <p className="text-sm text-[var(--text-secondary)] mt-0.5">
+                        {body}
+                      </p>
                     </div>
                   </li>
                 ))}
@@ -422,14 +423,11 @@ export default function TestimoniesPage() {
             </motion.div>
 
             {/* Recent testimonies preview */}
-            <motion.div
-              {...fadeUp}
-              transition={{ duration: 0.5, delay: 0.3 }}
-            >
-              <h3 className="font-display text-base font-bold text-[#F5F0E8] mb-3">
+            <motion.div {...fadeUp} transition={{ duration: 0.5, delay: 0.3 }}>
+              <h3 className="font-display text-base font-bold text-[var(--text-primary)] mb-3">
                 From our community
               </h3>
-            <div className="space-y-3">
+              <div className="space-y-3">
                 {featuredTestimonies.map((t) => (
                   <TestimonyMiniCard key={t.id} testimony={t} />
                 ))}

@@ -6,7 +6,7 @@ import { useSession } from "next-auth/react";
 import { useSearchParams } from "next/navigation";
 import { motion } from "framer-motion";
 import { DonationAmountSelector } from "@/components/ui/DonationAmountSelector";
-import { Heart, Shield, CheckCircle } from "lucide-react";
+import { HandHelping, ShieldCheck, CircleCheck } from "lucide-react";
 
 const impactStatements = [
   "Support medical and welfare outreaches",
@@ -45,7 +45,7 @@ export function DonatePageClient() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
         >
-          <CheckCircle className="h-16 w-16 text-[var(--accent-purple)] dark:text-primary mx-auto mb-4" />
+          <CircleCheck className="h-16 w-16 text-[var(--accent-purple)] dark:text-primary mx-auto mb-4" />
           <h1 className="font-display text-2xl font-bold text-[var(--text-primary)]">
             Thank you for your gift
           </h1>
@@ -74,7 +74,7 @@ export function DonatePageClient() {
 
   return (
     <>
-      <section className="pt-28 pb-16 bg-[var(--background-secondary)] dark:bg-gradient-to-b dark:from-[#1A1208] dark:via-transparent dark:to-[#050302]">
+      <section className="compact-page-intro pt-28 pb-16 bg-[var(--background-secondary)] dark:bg-gradient-to-b dark:from-[var(--background-secondary)] dark:via-transparent dark:to-[var(--background)]">
         <div className="max-w-4xl mx-auto px-4">
           <motion.h1
             className="font-display text-4xl md:text-5xl font-bold text-[var(--text-primary)]"
@@ -96,10 +96,10 @@ export function DonatePageClient() {
         </div>
       </section>
 
-      <section className="py-12 bg-[var(--background)] dark:bg-[#0D0A07]">
-        <div className="max-w-4xl mx-auto px-4">
+      <section className="giving-section py-12 bg-[var(--background)] dark:bg-[var(--background)]">
+        <div className="giving-layout max-w-4xl mx-auto px-4">
           <motion.div
-            className="rounded-2xl section-card p-6 md:p-8 mb-10"
+            className="giving-summary rounded-2xl section-card p-6 md:p-8 mb-10"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
@@ -113,7 +113,7 @@ export function DonatePageClient() {
                   key={i}
                   className="flex items-center gap-2 text-[var(--text-secondary)]"
                 >
-                  <Heart className="h-4 w-4 text-[var(--accent-gold)] dark:text-accent flex-shrink-0" />
+                  <HandHelping className="h-4 w-4 text-[var(--accent-gold)] dark:text-accent flex-shrink-0" />
                   {s}
                 </li>
               ))}
@@ -121,7 +121,7 @@ export function DonatePageClient() {
           </motion.div>
 
           <motion.div
-            className="max-w-2xl section-card p-6 md:p-8 rounded-2xl"
+            className="giving-form max-w-2xl section-card p-6 md:p-8 rounded-2xl"
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
@@ -130,22 +130,20 @@ export function DonatePageClient() {
               <button
                 type="button"
                 onClick={() => setFrequency("once")}
-                className={`flex-1 py-3 rounded-xl font-medium transition-colors ${
-                  frequency === "once"
-                    ? "bg-[var(--accent-gold)] dark:bg-accent text-[var(--text-primary)] dark:text-accent-foreground shadow-[0_0_18px_rgba(184,134,11,0.4)] dark:shadow-[0_0_18px_rgba(212,175,55,0.5)]"
-                    : "bg-[var(--surface-muted)] dark:bg-[#1C1508] text-[var(--text-secondary)] dark:text-[#F5F0E8B3] hover:bg-[var(--border)]/50 dark:hover:bg-[#2A1C0C]"
-                }`}
+                className={
+                  "giving-frequency " +
+                  (frequency === "once" ? "is-active" : "")
+                }
               >
                 One-time
               </button>
               <button
                 type="button"
                 onClick={() => setFrequency("monthly")}
-                className={`flex-1 py-3 rounded-xl font-medium transition-colors ${
-                  frequency === "monthly"
-                    ? "bg-[var(--accent-gold)] dark:bg-accent text-[var(--text-primary)] dark:text-accent-foreground shadow-[0_0_18px_rgba(184,134,11,0.4)] dark:shadow-[0_0_18px_rgba(212,175,55,0.5)]"
-                    : "bg-[var(--surface-muted)] dark:bg-[#1C1508] text-[var(--text-secondary)] dark:text-[#F5F0E8B3] hover:bg-[var(--border)]/50 dark:hover:bg-[#2A1C0C]"
-                }`}
+                className={
+                  "giving-frequency " +
+                  (frequency === "monthly" ? "is-active" : "")
+                }
               >
                 Monthly (Blessings Builders)
               </button>
@@ -156,7 +154,7 @@ export function DonatePageClient() {
               onAmountChange={(v) => setAmount(v)}
             />
 
-            <div className="mt-8 space-y-4">
+            <div className="mt-5 space-y-3">
               <div>
                 <label
                   htmlFor="donor-name"
@@ -194,8 +192,8 @@ export function DonatePageClient() {
 
             {error && <p className="mt-4 text-sm text-red-600">{error}</p>}
 
-            <div className="mt-6 p-4 rounded-xl bg-[var(--surface-muted)] dark:bg-[#1C1508] flex items-start gap-3">
-              <Shield className="h-5 w-5 text-[var(--accent-gold)] dark:text-accent flex-shrink-0 mt-0.5" />
+            <div className="mt-6 p-4 rounded-xl bg-[var(--surface-muted)] dark:bg-[var(--surface-muted)] flex items-start gap-3">
+              <ShieldCheck className="h-5 w-5 text-[var(--accent-gold)] dark:text-accent flex-shrink-0 mt-0.5" />
               <p className="text-sm text-[var(--text-secondary)]">
                 Secure payment via Paystack. Your details are protected. View
                 receipts in your{" "}

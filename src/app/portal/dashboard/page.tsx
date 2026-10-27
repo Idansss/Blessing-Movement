@@ -24,7 +24,7 @@ export default async function PortalDashboardPage() {
   const totalNaira = donations.reduce((s, d) => s + d.amount / 100, 0);
 
   return (
-    <div className="min-h-screen bg-muted/30 dark:bg-gradient-to-b dark:from-[#1A1208] dark:via-transparent dark:to-[#050302]">
+    <div className="min-h-screen bg-muted/30 dark:bg-gradient-to-b dark:from-[var(--background-secondary)] dark:via-transparent dark:to-[var(--background)]">
       <div className="max-w-3xl mx-auto px-4 pt-32 pb-12">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8 rounded-2xl bg-white/95 dark:bg-[#120D07]/90 border border-stone-200 dark:border-[var(--border)] p-5 shadow-sm">
           <div>
@@ -54,7 +54,8 @@ export default async function PortalDashboardPage() {
             ₦{totalNaira.toLocaleString("en-NG", { maximumFractionDigits: 0 })}
           </p>
           <p className="text-sm text-muted-foreground mt-1">
-            Total given ({donations.length} donation{donations.length !== 1 ? "s" : ""})
+            Total given ({donations.length} donation
+            {donations.length !== 1 ? "s" : ""})
           </p>
         </div>
 
@@ -65,19 +66,28 @@ export default async function PortalDashboardPage() {
           {donations.length === 0 ? (
             <div className="p-8 text-center text-muted-foreground">
               <p>No completed donations yet.</p>
-              <Link href="/donate" className="mt-2 inline-block text-primary font-medium hover:underline">
+              <Link
+                href="/donate"
+                className="mt-2 inline-block text-primary font-medium hover:underline"
+              >
                 Make your first gift →
               </Link>
             </div>
           ) : (
             <ul className="divide-y divide-stone-100">
               {donations.map((d) => (
-                <li key={d.id} className="flex items-center justify-between p-4 hover:bg-muted/30">
+                <li
+                  key={d.id}
+                  className="flex items-center justify-between p-4 hover:bg-muted/30"
+                >
                   <div>
                     <p className="font-medium text-stone-900">
                       ₦{(d.amount / 100).toLocaleString("en-NG")}
                       {d.frequency === "monthly" && (
-                        <span className="text-muted-foreground font-normal text-sm"> / month</span>
+                        <span className="text-muted-foreground font-normal text-sm">
+                          {" "}
+                          / month
+                        </span>
                       )}
                     </p>
                     <p className="text-sm text-muted-foreground">
@@ -85,7 +95,9 @@ export default async function PortalDashboardPage() {
                         ? new Date(d.completedAt).toLocaleDateString("en-NG", {
                             dateStyle: "medium",
                           })
-                        : new Date(d.createdAt).toLocaleDateString("en-NG", { dateStyle: "medium" })}
+                        : new Date(d.createdAt).toLocaleDateString("en-NG", {
+                            dateStyle: "medium",
+                          })}
                     </p>
                   </div>
                   <Link
@@ -101,7 +113,10 @@ export default async function PortalDashboardPage() {
         </div>
 
         <p className="mt-6 text-center text-sm">
-          <Link href="/" className="text-stone-700 hover:text-stone-900 dark:text-[var(--text-secondary)] dark:hover:text-[var(--text-primary)] font-medium">
+          <Link
+            href="/"
+            className="text-stone-700 hover:text-stone-900 dark:text-[var(--text-secondary)] dark:hover:text-[var(--text-primary)] font-medium"
+          >
             ← Back to site
           </Link>
         </p>
@@ -109,4 +124,3 @@ export default async function PortalDashboardPage() {
     </div>
   );
 }
-

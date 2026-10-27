@@ -23,31 +23,32 @@ const config: Config = {
         "accent-purple": "var(--accent-purple)",
         border: "var(--border)",
         primary: {
-          DEFAULT: "#3B214B",
+          DEFAULT: "#6845D8",
           foreground: "#F5F0E8",
-          light: "#5C3473",
-          dark: "#241331",
+          light: "#7C5BE8",
+          dark: "#5131B8",
         },
         accent: {
-          DEFAULT: "#D4AF37",
-          foreground: "#1A1208",
-          light: "#E5C65C",
-          dark: "#C8860A",
+          DEFAULT: "#C4B5FD",
+          foreground: "#171329",
+          light: "#DDD4FF",
+          dark: "#6D4BD8",
         },
         muted: {
-          DEFAULT: "#1C1508",
-          foreground: "#A89A84",
+          DEFAULT: "var(--surface-muted)",
+          foreground: "var(--text-secondary)",
         },
       },
       fontFamily: {
         sans: ["var(--font-inter)", "system-ui", "sans-serif"],
-        display: ["var(--font-playfair)", "Georgia", "serif"],
+        display: ["var(--font-playfair)", "system-ui", "sans-serif"],
       },
       backgroundImage: {
         "gradient-hero":
-          "radial-gradient(circle at 15% 0%, rgba(212,175,55,0.35), transparent 55%), radial-gradient(circle at 80% 0%, rgba(232,115,42,0.3), transparent 55%), radial-gradient(circle at 50% 120%, #050302, #0D0A07)",
-        "gradient-gold": "linear-gradient(135deg, #D4AF37 0%, #E5C65C 100%)",
-        grain: "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E\")",
+          "linear-gradient(135deg, var(--background-secondary), var(--background))",
+        "gradient-gold": "linear-gradient(135deg, #C4B5FD, #9D83EE)",
+        grain:
+          "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E\")",
       },
       animation: {
         "fade-in": "fadeIn 0.6s ease-out forwards",

@@ -1,5 +1,6 @@
 "use client";
 
+import { ThemedSelect } from "@/components/ui/ThemedSelect";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { CloudinaryUpload } from "@/components/ui/CloudinaryUpload";
@@ -58,7 +59,9 @@ export function EventEditForm({ event }: { event: Event }) {
   return (
     <form onSubmit={handleSubmit} className="max-w-xl space-y-4">
       <div>
-        <label className="block text-sm font-medium text-stone-700 mb-1">Title *</label>
+        <label className="block text-sm font-medium text-stone-700 mb-1">
+          Title *
+        </label>
         <input
           type="text"
           required
@@ -68,7 +71,9 @@ export function EventEditForm({ event }: { event: Event }) {
         />
       </div>
       <div>
-        <label className="block text-sm font-medium text-stone-700 mb-1">Slug</label>
+        <label className="block text-sm font-medium text-stone-700 mb-1">
+          Slug
+        </label>
         <input
           type="text"
           value={form.slug}
@@ -77,20 +82,25 @@ export function EventEditForm({ event }: { event: Event }) {
         />
       </div>
       <div>
-        <label className="block text-sm font-medium text-stone-700 mb-1">Type</label>
-        <select
+        <label className="block text-sm font-medium text-stone-700 mb-1">
+          Type
+        </label>
+        <ThemedSelect
+          aria-label="Event type"
           value={form.type}
-          onChange={(e) => setForm((f) => ({ ...f, type: e.target.value }))}
-          className="w-full px-4 py-2 rounded-lg border border-stone-200"
-        >
-          <option value="outreach">Outreach</option>
-          <option value="praise">Praise & Prophesy</option>
-          <option value="hangout">Hangout</option>
-          <option value="bootcamp">Bootcamp</option>
-        </select>
+          onValueChange={(value) => setForm((f) => ({ ...f, type: value }))}
+          options={[
+            { value: "outreach", label: "Outreach" },
+            { value: "praise", label: "Praise & Prophesy" },
+            { value: "hangout", label: "Hangout" },
+            { value: "bootcamp", label: "Bootcamp" },
+          ]}
+        />
       </div>
       <div>
-        <label className="block text-sm font-medium text-stone-700 mb-1">Start *</label>
+        <label className="block text-sm font-medium text-stone-700 mb-1">
+          Start *
+        </label>
         <input
           type="datetime-local"
           required
@@ -100,7 +110,9 @@ export function EventEditForm({ event }: { event: Event }) {
         />
       </div>
       <div>
-        <label className="block text-sm font-medium text-stone-700 mb-1">End</label>
+        <label className="block text-sm font-medium text-stone-700 mb-1">
+          End
+        </label>
         <input
           type="datetime-local"
           value={form.endAt}
@@ -109,7 +121,9 @@ export function EventEditForm({ event }: { event: Event }) {
         />
       </div>
       <div>
-        <label className="block text-sm font-medium text-stone-700 mb-1">Location</label>
+        <label className="block text-sm font-medium text-stone-700 mb-1">
+          Location
+        </label>
         <input
           type="text"
           value={form.location}
@@ -118,7 +132,9 @@ export function EventEditForm({ event }: { event: Event }) {
         />
       </div>
       <div>
-        <label className="block text-sm font-medium text-stone-700 mb-1">Capacity</label>
+        <label className="block text-sm font-medium text-stone-700 mb-1">
+          Capacity
+        </label>
         <input
           type="number"
           min="1"
@@ -138,7 +154,9 @@ export function EventEditForm({ event }: { event: Event }) {
           <input
             type="checkbox"
             checked={form.published}
-            onChange={(e) => setForm((f) => ({ ...f, published: e.target.checked }))}
+            onChange={(e) =>
+              setForm((f) => ({ ...f, published: e.target.checked }))
+            }
           />
           <span className="text-sm">Published</span>
         </label>

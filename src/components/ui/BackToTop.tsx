@@ -30,7 +30,7 @@ export function BackToTop() {
                 : "smooth",
             })
           }
-          className="fixed bottom-24 right-6 z-40 p-3 rounded-full bg-white border border-stone-200 shadow-lg text-primary hover:bg-primary hover:text-white hover:border-primary transition-colors"
+          className="back-to-top"
           aria-label="Back to top"
         >
           <ArrowUp className="h-5 w-5" />

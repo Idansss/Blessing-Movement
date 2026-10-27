@@ -3,18 +3,21 @@ import Link from "next/link";
 import {
   ArrowUpRight,
   ArrowRight,
-  Heart,
-  Music2,
-  Users,
+  HandHelping,
+  Sparkles,
+  AudioLines,
+  UsersRound,
   MapPin,
 } from "lucide-react";
 import { events, eventDateLabel } from "@/data/events";
 import { Newsletter } from "@/components/ui/Newsletter";
+import { BlurText } from "@/components/ui/BlurText";
+import { Reveal } from "@/components/ui/Reveal";
 import { PhotoRoll } from "@/components/ui/PhotoRoll";
 const work = [
   {
     number: "01",
-    icon: Heart,
+    icon: HandHelping,
     title: "Care that reaches people.",
     label: "Medical & welfare outreach",
     description:
@@ -24,7 +27,7 @@ const work = [
   },
   {
     number: "02",
-    icon: Music2,
+    icon: AudioLines,
     title: "Faith that brings us together.",
     label: "Worship & prayer",
     description:
@@ -34,7 +37,7 @@ const work = [
   },
   {
     number: "03",
-    icon: Users,
+    icon: UsersRound,
     title: "A family to grow with.",
     label: "The Blessings Movement",
     description:
@@ -49,14 +52,17 @@ export default function HomePage() {
       <section className="home-hero page-width">
         <div className="hero-copy">
           <p className="eyebrow">
-            <span className="little-cross">✦</span> Blessings Global Outreach
+            <Sparkles className="little-cross" size={15} /> Blessings Global
+            Outreach
           </p>
           <h1>
-            Love in action.
+            <BlurText text="Love in action." />
             <br />
-            Hope in every
+            <BlurText text="Hope in every" delay={0.12} />
             <br />
-            <em>blessing.</em>
+            <em>
+              <BlurText text="blessing." delay={0.24} />
+            </em>
           </h1>
           <p className="hero-intro">
             Spreading the love of Christ through practical care, worship and a
@@ -75,7 +81,7 @@ export default function HomePage() {
             Rooted in faith. Reaching out in love.
           </div>
         </div>
-        <div className="hero-visual">
+        <Reveal className="hero-visual" delay={0.1}>
           <div className="hero-photo">
             <Image
               src="/images/outreach/medical-care.jpg"
@@ -84,30 +90,27 @@ export default function HomePage() {
               priority
               sizes="(max-width: 800px) 100vw, 52vw"
             />
+            <span className="photo-tag">
+              <Sparkles size={14} />
+              This is love in action
+            </span>
+          </div>
+          <div className="hero-caption-row">
+            <div className="hero-inset">
+              <Image
+                src="/images/outreach/welfare-visit.jpg"
+                alt="Volunteers delivering welfare supplies"
+                fill
+                sizes="88px"
+              />
+            </div>
             <div className="photo-caption">
-              <span>A glimpse of love in action</span>
+              <span>From our outreach family</span>
               <strong>The Blessings outreach</strong>
+              <p>Real people. Real moments. Real love.</p>
             </div>
           </div>
-          <div className="hero-inset">
-            <Image
-              src="/images/outreach/welfare-visit.jpg"
-              alt="Volunteers delivering welfare supplies"
-              fill
-              sizes="220px"
-            />
-          </div>
-          <div className="image-seal">
-            BLESSED TO
-            <br />
-            <Heart size={22} strokeWidth={1.5} />
-            <br />
-            BE A BLESSING
-          </div>
-          <span className="photo-index">
-            REAL PEOPLE. REAL MOMENTS. REAL LOVE.
-          </span>
-        </div>
+        </Reveal>
       </section>
       <section className="next-gathering">
         <div className="page-width gathering-inner">
@@ -161,34 +164,36 @@ export default function HomePage() {
           </div>
           <div className="work-list">
             {work.map((item) => (
-              <article key={item.number} className="work-row">
-                <div className="work-image">
-                  <Image
-                    src={item.image}
-                    alt={item.alt}
-                    fill
-                    sizes="(max-width: 700px) 100vw, 36vw"
-                  />
-                </div>
-                <div className="work-copy">
-                  <div className="work-meta">
-                    <span>{item.number} /</span>
-                    <span>
-                      <item.icon size={16} />
-                      {item.label}
-                    </span>
+              <Reveal key={item.number}>
+                <article className="work-row">
+                  <div className="work-image">
+                    <Image
+                      src={item.image}
+                      alt={item.alt}
+                      fill
+                      sizes="(max-width: 700px) 100vw, 36vw"
+                    />
                   </div>
-                  <h3>{item.title}</h3>
-                  <p>{item.description}</p>
-                  <Link
-                    href="/programs"
-                    className="circle-link"
-                    aria-label={"Explore " + item.label}
-                  >
-                    <ArrowUpRight size={23} />
-                  </Link>
-                </div>
-              </article>
+                  <div className="work-copy">
+                    <div className="work-meta">
+                      <span>{item.number} /</span>
+                      <span>
+                        <item.icon size={16} />
+                        {item.label}
+                      </span>
+                    </div>
+                    <h3>{item.title}</h3>
+                    <p>{item.description}</p>
+                    <Link
+                      href="/programs"
+                      className="circle-link"
+                      aria-label={"Explore " + item.label}
+                    >
+                      <ArrowUpRight size={23} />
+                    </Link>
+                  </div>
+                </article>
+              </Reveal>
             ))}
           </div>
         </div>

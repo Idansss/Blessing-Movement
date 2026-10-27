@@ -1,24 +1,34 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, MoveUpRight, Globe2 } from "lucide-react";
 import { Newsletter } from "@/components/ui/Newsletter";
+import { Reveal } from "@/components/ui/Reveal";
 export function Footer() {
   return (
     <footer className="site-footer">
       <div className="page-width">
-        <div className="footer-top">
+        <Reveal className="footer-top">
           <div>
-            <span className="eyebrow">There is a place for you here</span>
+            <span className="eyebrow">A little kindness goes a long way</span>
             <h2>
-              Be blessed.
+              Good starts
               <br />
-              <em>Be a blessing.</em>
+              with <em>all of us.</em>
             </h2>
           </div>
-          <Link href="/get-involved" className="button button-gold">
-            Join the movement <ArrowUpRight size={18} />
-          </Link>
-        </div>
+          <div className="footer-invitation">
+            <p>
+              Bring your time, your skills, your willing heart. There is a place
+              for you in the movement.
+            </p>
+            <Link href="/get-involved" className="footer-join">
+              Find your place{" "}
+              <span>
+                <MoveUpRight size={27} strokeWidth={1.6} />
+              </span>
+            </Link>
+          </div>
+        </Reveal>
         <div className="footer-columns">
           <div>
             <Image
@@ -29,10 +39,14 @@ export function Footer() {
               className="footer-logo"
             />
             <p>
-              Spreading the love of Christ.
+              Faith in our hearts.
               <br />
-              One blessing at a time.
+              Love in our hands.
             </p>
+            <span className="footer-location">
+              <Globe2 size={15} />
+              Rooted in faith. Reaching further.
+            </span>
           </div>
           <nav aria-label="Explore">
             <h3>Explore</h3>
@@ -50,8 +64,12 @@ export function Footer() {
             <Link href="/contact">Contact</Link>
           </nav>
           <div>
-            <h3>A little good in your inbox</h3>
-            <p>Outreach stories, gatherings and ways to serve.</p>
+            <h3>Stay in the loop</h3>
+            <p>
+              Fresh stories. Upcoming gatherings.
+              <br />
+              More ways to make a difference.
+            </p>
             <Newsletter source="footer" />
           </div>
         </div>
@@ -59,7 +77,7 @@ export function Footer() {
           <span>© {new Date().getFullYear()} Blessings Global Outreach</span>
           <span>Faith. Compassion. Community.</span>
           <Link href="/admin/media">
-            Team access <ArrowUpRight size={13} />
+            Team access <ArrowUpRight size={14} />
           </Link>
         </div>
       </div>
